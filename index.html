@@ -820,6 +820,7 @@ body {
 .tab-btn:hover { border-color: #1a73e8; }
 .tab-btn.active { border-color: #032D60 !important; background: #032D60 !important; color: white !important; }
 .tab-btn.active-google { border-color: #1a73e8 !important; background: #1a73e8 !important; color: white !important; }
+.tab-btn.active-claude { border-color: #c97e3a !important; background: #c97e3a !important; color: white !important; }
 .tab-badge {
   font-size: 10px; font-weight: 700; padding: 2px 8px;
   border-radius: 10px; color: white; text-transform: uppercase; letter-spacing: 0.5px;
@@ -1043,121 +1044,64 @@ body {
      SLIDE 2 — SALESFORCE AS MCP SERVER
 ══════════════════════════════════════════ -->
 <section class="slide slide-arch" id="s2">
-  <div class="slide-inner" style="justify-content:flex-start;">
-    <div class="arch-eyebrow" style="margin-bottom:6px;">Technical Architecture · Live Demo</div>
-    <h2 class="arch-h1" style="margin-bottom:6px;">Salesforce as MCP Server</h2>
-    <p class="arch-desc" style="margin-bottom:20px;">Claude Desktop calls Salesforce tools via MCP — pulling live case data, analyzing coaching priorities, and writing activity logs back to CRM. No integration code. No API keys.</p>
-
-    <div class="arch-two-col">
-
-      <!-- LEFT: architecture diagram -->
-      <div class="arch-left">
-        <div class="arch-diagram" style="grid-template-columns: 1fr auto 1fr auto 1fr; margin-bottom:16px;">
-          <div class="arch-layer">
-            <div class="arch-layer-label">AI Client</div>
-            <div class="arch-node gold-node">
-              <div class="arch-node-name">Claude Desktop</div>
-              <div class="arch-node-sub">Sonnet 4.6</div>
-            </div>
-          </div>
-          <div class="arch-arrow">
-            <div>
-              <div style="text-align:center;font-size:20px;color:var(--mule);">⇄</div>
-              <div class="flow-label">MCP</div>
-            </div>
-          </div>
-          <div class="arch-layer">
-            <div class="arch-layer-label">Salesforce MCP Server</div>
-            <div class="arch-node highlight" style="padding:14px;">
-              <div class="arch-node-name">Salesforce</div>
-              <div class="arch-node-name">MCP Server</div>
-              <div class="arch-node-sub" style="margin-top:4px;">Tool discovery &amp; execution</div>
-            </div>
-          </div>
-          <div class="arch-arrow">
-            <div>
-              <div style="text-align:center;font-size:20px;color:var(--mule);">⇄</div>
-              <div class="flow-label">Native</div>
-            </div>
-          </div>
-          <div class="arch-layer">
-            <div class="arch-layer-label">Salesforce Data</div>
-            <div class="arch-node" style="border-color:#1a6faf;">
-              <div class="arch-node-name" style="color:#4db8ff;">Service Cases</div>
-              <div class="arch-node-sub">60-day history</div>
-            </div>
-            <div class="arch-node" style="border-color:#1a6faf; margin-top:8px;">
-              <div class="arch-node-name" style="color:#4db8ff;">Activity Logs</div>
-              <div class="arch-node-sub">Write-back via MCP</div>
-            </div>
-          </div>
-        </div>
-        <div class="arch-legend" style="margin-top:0;">
-          <div class="legend-item"><div class="legend-dot" style="background:var(--mule);"></div>MCP Protocol — bidirectional read &amp; write</div>
-          <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Claude generates tool calls, Salesforce executes them</div>
-          <div class="legend-item"><div class="legend-dot" style="background:#4db8ff;"></div>All data stays in Salesforce — zero exfiltration</div>
-        </div>
-      </div>
-
-      <!-- RIGHT: Claude Desktop mock with step-through -->
+  <div class="slide-inner">
+    <div class="arch-mcp-hero">
       <div>
-        <div style="font-size:11px;font-weight:600;color:var(--mule);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Live Demo · Claude Desktop + Salesforce MCP</div>
-        <div class="claude-app">
-          <!-- macOS titlebar -->
-          <div class="claude-titlebar">
-            <div class="claude-dots">
-              <div class="claude-dot red"></div>
-              <div class="claude-dot yellow"></div>
-              <div class="claude-dot green"></div>
-            </div>
-            <div class="claude-titlebar-center">
-              <span class="claude-titlebar-title">Improving contact center experience and employee coaching</span>
-              <span class="claude-titlebar-chevron">⌄</span>
-            </div>
-            <span class="claude-titlebar-share">↗</span>
-          </div>
-          <!-- Body -->
-          <div class="claude-app-body">
-            <!-- Sidebar -->
-            <div class="claude-sidebar">
-              <div class="claude-sidebar-nav active"><span class="claude-sidebar-nav-icon">💬</span> Chat</div>
-              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📁</span> Projects</div>
-              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📎</span> Artifacts</div>
-              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">✦</span> Customize</div>
-              <div class="claude-sidebar-divider"></div>
-              <div class="claude-sidebar-section-label">Recents</div>
-              <div class="claude-sidebar-item active-item">Improving contact cent…</div>
-              <div class="claude-sidebar-item">Wyndham hotel bookin…</div>
-              <div class="claude-sidebar-item">Connecting to Salesfor…</div>
-              <div class="claude-sidebar-item">Connecting to an MCP…</div>
-              <div class="claude-sidebar-user">
-                <div class="claude-sidebar-user-dot"></div>
-                Patrick Loughran
-              </div>
-            </div>
-            <!-- Chat main -->
-            <div class="claude-chat-main">
-              <div class="claude-messages" id="claude-msgs"></div>
-              <div class="claude-input-bar">
-                <div class="claude-input-inner">
-                  <span style="font-size:13px;color:#bbb;">＋</span>
-                  <span class="claude-input-text">Write a message…</span>
-                  <span class="claude-model-label">Sonnet 4.6 ✦</span>
-                </div>
-              </div>
-              <div style="text-align:center;font-size:9px;color:#bbb;padding:4px 0 6px;background:#fff;">Claude is AI and can make mistakes. Please double-check responses.</div>
-            </div>
-          </div>
+        <div class="arch-eyebrow">Technical Architecture</div>
+        <h2 class="arch-h1">Salesforce as MCP Server</h2>
+      </div>
+    </div>
+    <p class="arch-desc">The AI layer communicates directly with Salesforce via MCP — Salesforce exposes Data Cloud and CRM as MCP tools, giving Claude and Agentforce live access to Wyndham's unified data without an intermediary gateway.</p>
+
+    <div class="arch-diagram" style="grid-template-columns: 1fr auto 1fr auto 1fr;">
+      <div class="arch-layer">
+        <div class="arch-layer-label">AI Layer</div>
+        <div class="arch-node gold-node">
+          <div class="arch-node-name">Claude / Agentforce</div>
+          <div class="arch-node-sub">Anthropic Models</div>
         </div>
-        <!-- Step nav -->
-        <div class="demo-step-nav" id="demo-nav">
-          <button class="demo-step-btn" id="demo-prev" disabled>←</button>
-          <div class="demo-step-label" id="demo-label"></div>
-          <div class="demo-step-dots" id="demo-dots"></div>
-          <button class="demo-step-btn" id="demo-next">→</button>
+        <div class="arch-node" style="border-color:#58a6ff; margin-top:8px;">
+          <div class="arch-node-name" style="color:#58a6ff;">Vertex AI</div>
+          <div class="arch-node-sub">Google Cloud</div>
         </div>
       </div>
+      <div class="arch-arrow">
+        <div>
+          <div style="text-align:center;font-size:22px;color:var(--mule);">⇄</div>
+          <div class="flow-label">MCP<br/>Protocol</div>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Salesforce · MCP Server</div>
+        <div class="arch-node highlight" style="padding:16px 14px;">
+          <div class="arch-node-name">Salesforce</div>
+          <div class="arch-node-name">MCP Server</div>
+          <div class="arch-node-sub" style="margin-top:6px;">Tool discovery &amp; execution<br/>Identity-aware access control</div>
+        </div>
+      </div>
+      <div class="arch-arrow">
+        <div>
+          <div style="text-align:center;font-size:22px;color:var(--mule);">⇄</div>
+          <div class="flow-label">Native<br/>Access</div>
+        </div>
+      </div>
+      <div class="arch-layer">
+        <div class="arch-layer-label">Salesforce Data</div>
+        <div class="arch-node" style="border-color:#1a6faf;">
+          <div class="arch-node-name" style="color:#4db8ff;">Data Cloud</div>
+          <div class="arch-node-sub">Guest 360 / Unified</div>
+        </div>
+        <div class="arch-node" style="border-color:#1a6faf; margin-top:8px;">
+          <div class="arch-node-name" style="color:#4db8ff;">CRM / Service</div>
+          <div class="arch-node-sub">Franchise Records</div>
+        </div>
+      </div>
+    </div>
 
+    <div class="arch-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--mule);"></div>MCP Protocol (tool discovery, invocation, responses)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Agentforce / Claude generating &amp; executing tool calls</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4db8ff;"></div>Salesforce platform (CRM, Data Cloud, Service Cloud)</div>
     </div>
   </div>
 </section>
@@ -1291,6 +1235,9 @@ body {
       <button class="tab-btn" id="tab-google" onclick="switchTab('google')">
         💬 Lead Qualification Agent <span class="tab-badge" style="background:#1a73e8;">Google Agentspace</span>
       </button>
+      <button class="tab-btn" id="tab-claude" onclick="switchTab('claude')">
+        ✦ Contact Center Coach <span class="tab-badge" style="background:#c97e3a;">Claude Desktop</span>
+      </button>
     </div>
 
     <!-- ── TAB: AGENTFORCE ── -->
@@ -1399,6 +1346,88 @@ body {
             <div class="chat-flow-step">
               <div class="chat-flow-num">4</div>
               <div class="chat-flow-text"><strong>AE notified instantly</strong> — hot leads route to Senior AE within minutes. Full context already in Salesforce.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: CLAUDE DESKTOP ── -->
+    <div id="panel-claude" class="chat-layout" style="display:none;">
+      <!-- Left: Claude Desktop app -->
+      <div>
+        <div style="font-size:11px;font-weight:600;color:#c97e3a;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Interactive Demo · Claude Desktop + Salesforce MCP</div>
+        <div class="claude-app">
+          <div class="claude-titlebar">
+            <div class="claude-dots">
+              <div class="claude-dot red"></div>
+              <div class="claude-dot yellow"></div>
+              <div class="claude-dot green"></div>
+            </div>
+            <div class="claude-titlebar-center">
+              <span class="claude-titlebar-title" id="claude-convo-title">Improving contact center experience and employee coaching</span>
+              <span class="claude-titlebar-chevron">⌄</span>
+            </div>
+            <span class="claude-titlebar-share">↗</span>
+          </div>
+          <div class="claude-app-body">
+            <div class="claude-sidebar">
+              <div class="claude-sidebar-nav active"><span class="claude-sidebar-nav-icon">💬</span> Chat</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📁</span> Projects</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📎</span> Artifacts</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">✦</span> Customize</div>
+              <div class="claude-sidebar-divider"></div>
+              <div class="claude-sidebar-section-label">Recents</div>
+              <div class="claude-sidebar-item active-item">Improving contact cent…</div>
+              <div class="claude-sidebar-item">Wyndham hotel bookin…</div>
+              <div class="claude-sidebar-item">Connecting to Salesfor…</div>
+              <div class="claude-sidebar-item">Connecting to an MCP…</div>
+              <div class="claude-sidebar-user">
+                <div class="claude-sidebar-user-dot"></div>
+                Patrick Loughran
+              </div>
+            </div>
+            <div class="claude-chat-main">
+              <div class="claude-messages" id="claude-messages"></div>
+              <div class="claude-input-bar">
+                <div class="claude-input-inner">
+                  <span style="font-size:13px;color:#bbb;">＋</span>
+                  <input id="claude-input" class="claude-input-text" type="text" placeholder="Write a message…" autocomplete="off" style="border:none;outline:none;flex:1;background:transparent;font-size:11.5px;color:#1a1a1a;font-family:inherit;" />
+                  <div id="claude-send" style="width:28px;height:28px;border-radius:50%;background:#c97e3a;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;cursor:pointer;">➤</div>
+                </div>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#bbb;padding:4px 0 6px;background:#fff;">Claude is AI and can make mistakes. Please double-check responses.</div>
+            </div>
+          </div>
+        </div>
+        <div id="claude-footer" style="font-size:10px;color:#9aa0a6;margin-top:8px;text-align:center;">Click a suggestion or type a question</div>
+      </div>
+
+      <!-- Right: value panel -->
+      <div class="chat-value-panel">
+        <div>
+          <div class="chat-value-eyebrow" style="color:#c97e3a;">The Claude Desktop Scenario</div>
+          <div class="chat-value-h1">Contact Center Intelligence via Salesforce MCP</div>
+          <div class="chat-value-desc">A manager opens Claude Desktop and asks a natural-language question about their team. Claude calls the Salesforce MCP server — pulling live case data, scoring agent performance, and writing an activity log back to CRM — without a single line of integration code.</div>
+        </div>
+        <div>
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#5f6368;margin-bottom:8px;">Salesforce MCP Tools Called</div>
+          <div class="chat-flow-steps">
+            <div class="chat-flow-step">
+              <div class="af-flow-num" style="background:#c97e3a;">1</div>
+              <div class="chat-flow-text"><strong>salesforce_query (Cases)</strong> — retrieves all open and closed cases from the last 60 days, grouped by agent.</div>
+            </div>
+            <div class="chat-flow-step">
+              <div class="af-flow-num" style="background:#c97e3a;">2</div>
+              <div class="chat-flow-text"><strong>salesforce_query (Agents)</strong> — cross-references close rate, escalation rate, and open workload per agent to surface coaching priorities.</div>
+            </div>
+            <div class="chat-flow-step">
+              <div class="af-flow-num" style="background:#c97e3a;">3</div>
+              <div class="chat-flow-text"><strong>salesforce_get_contact · salesforce_get_user</strong> — looks up both John Bailey's contact record and Patrick's user ID before logging.</div>
+            </div>
+            <div class="chat-flow-step">
+              <div class="af-flow-num" style="background:#c97e3a;">4</div>
+              <div class="chat-flow-text"><strong>salesforce_create_activity</strong> — writes the call log directly to Salesforce CRM via MCP. No webhook, no middleware, no manual entry.</div>
             </div>
           </div>
         </div>
@@ -1592,113 +1621,15 @@ body {
 
 <script>
 /* ══════════════════════════════
-   CLAUDE DESKTOP DEMO STEPS
-══════════════════════════════ */
-(function() {
-  var STEPS = [
-    {
-      label: 'Ask Claude about contact center performance',
-      messages: [
-        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' }
-      ]
-    },
-    {
-      label: 'Claude pulls live Salesforce case data via MCP',
-      messages: [
-        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
-        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: 'Used Salesforce integration, loaded tools.<div class="claude-sf-card" style="margin-top:8px;"><div class="claude-sf-card-label">Case Summary — Last 60 Days</div><div class="claude-sf-row"><span>Total Cases</span><span class="claude-sf-val">209</span></div><div class="claude-sf-row"><span>Open / Unresolved</span><span class="claude-sf-val warn">161</span></div><div class="claude-sf-row"><span>Closed Cases</span><span class="claude-sf-val good">38</span></div><div class="claude-sf-row"><span>Escalated</span><span class="claude-sf-val bad">3</span></div></div>' }
-      ]
-    },
-    {
-      label: 'Claude breaks down performance by agent',
-      messages: [
-        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
-        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Agent Case Breakdown — Last 60 Days</div><div class="claude-sf-row"><span>Alexis Williams</span><span class="claude-sf-val bad">0% close rate</span></div><div class="claude-sf-row"><span>Patrick Loughran</span><span class="claude-sf-val warn">15%</span></div><div class="claude-sf-row"><span>Brenda Service</span><span class="claude-sf-val warn">55%</span></div><div class="claude-sf-row"><span>Linda Service</span><span class="claude-sf-val good">80%</span></div><div class="claude-sf-row"><span>Jay Service</span><span class="claude-sf-val warn">67%</span></div><div class="claude-sf-row"><span>Quentin Engineer</span><span class="claude-sf-val warn">47%</span></div></div>' }
-      ]
-    },
-    {
-      label: 'Claude identifies coaching priorities',
-      messages: [
-        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
-        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Coaching Priorities</div><div style="margin-bottom:7px;"><div style="font-size:11px;font-weight:700;color:#c0392b;margin-bottom:2px;">↑ Alexis Williams</div><div style="font-size:10.5px;color:#555;line-height:1.4;">0 closed of 32 total — all cases sitting open. Highest-priority coaching candidate.</div></div><div><div style="font-size:11px;font-weight:700;color:#e67700;margin-bottom:2px;">↑ Patrick Loughran</div><div style="font-size:10.5px;color:#555;line-height:1.4;">15% close rate, 23 open cases. Consider pairing with a senior agent.</div></div></div>' }
-      ]
-    },
-    {
-      label: 'Log a follow-up call to Salesforce via MCP',
-      messages: [
-        { type: 'user', text: 'Log a call with John Bailey about his property improvement plan.' },
-        { type: 'tool', name: 'salesforce_get_contact', args: 'name="John Bailey"', result: 'Contact ID found' },
-        { type: 'tool', name: 'salesforce_create_activity', args: 'type="Call", subject="Property Improvement Plan"', result: 'Activity logged ✓' },
-        { type: 'bot', html: "I found both records. Here's what I'll log:<br/><br/><strong>Who:</strong> Patrick Loughran called John Bailey<br/><strong>Subject:</strong> Call with John Bailey — Property Improvement Plan<br/><strong>Description:</strong> Discussed property improvement plan; follow-up needed<br/><strong>Type:</strong> Call<br/><br/>Can you confirm I should create this activity log?" }
-      ]
-    }
-  ];
-
-  var current = 0;
-  var msgsEl   = document.getElementById('claude-msgs');
-  var prevBtn  = document.getElementById('demo-prev');
-  var nextBtn  = document.getElementById('demo-next');
-  var labelEl  = document.getElementById('demo-label');
-  var dotsEl   = document.getElementById('demo-dots');
-
-  if (!msgsEl) return;
-
-  // Build dots
-  STEPS.forEach(function(_, i) {
-    var d = document.createElement('div');
-    d.className = 'demo-step-dot' + (i === 0 ? ' on' : '');
-    dotsEl.appendChild(d);
-  });
-
-  function render(idx) {
-    var step = STEPS[idx];
-    msgsEl.innerHTML = '';
-    step.messages.forEach(function(m) {
-      var el = document.createElement('div');
-      if (m.type === 'user') {
-        el.className = 'claude-msg-user';
-        el.innerHTML = '<div class="claude-bubble-user">' + m.text.replace(/\n/g, '<br>') + '</div>';
-      } else if (m.type === 'tool') {
-        el.className = 'claude-msg-bot';
-        el.innerHTML = '<div class="claude-avatar-light">✦</div>'
-          + '<div class="claude-bubble-bot-light">'
-          + '<div class="claude-integration-pill"><span class="pill-icon">🔗</span>'
-          + '<span>' + m.name + ' · ' + m.result + '</span>'
-          + '<span class="pill-arrow">›</span></div></div>';
-      } else {
-        el.className = 'claude-msg-bot';
-        el.innerHTML = '<div class="claude-avatar-light">✦</div>'
-          + '<div class="claude-bubble-bot-light">' + m.html + '</div>';
-      }
-      msgsEl.appendChild(el);
-    });
-    msgsEl.scrollTop = msgsEl.scrollHeight;
-    labelEl.textContent = (idx + 1) + ' / ' + STEPS.length + ' — ' + step.label;
-    dotsEl.querySelectorAll('.demo-step-dot').forEach(function(d, i) {
-      d.classList.toggle('on', i === idx);
-    });
-    prevBtn.disabled = (idx === 0);
-    nextBtn.disabled = (idx === STEPS.length - 1);
-    current = idx;
-  }
-
-  prevBtn.addEventListener('click', function() { if (current > 0) render(current - 1); });
-  nextBtn.addEventListener('click', function() { if (current < STEPS.length - 1) render(current + 1); });
-
-  render(0);
-})();
-
-/* ══════════════════════════════
    TAB SWITCH
 ══════════════════════════════ */
 function switchTab(tab) {
-  document.getElementById('panel-af').style.display    = tab === 'af'     ? 'grid' : 'none';
+  document.getElementById('panel-af').style.display     = tab === 'af'     ? 'grid' : 'none';
   document.getElementById('panel-google').style.display = tab === 'google' ? 'grid' : 'none';
+  document.getElementById('panel-claude').style.display = tab === 'claude' ? 'grid' : 'none';
   document.getElementById('tab-af').className     = 'tab-btn' + (tab === 'af'     ? ' active' : '');
   document.getElementById('tab-google').className = 'tab-btn' + (tab === 'google' ? ' active-google' : '');
+  document.getElementById('tab-claude').className  = 'tab-btn' + (tab === 'claude' ? ' active-claude' : '');
 }
 
 /* ══════════════════════════════
@@ -2004,6 +1935,168 @@ function switchTab(tab) {
   btn.addEventListener('click', function(){gSend();});
   inp.addEventListener('keydown', function(e){if(e.key==='Enter')gSend();});
   gReset();
+})();
+
+/* ══════════════════════════════
+   CLAUDE DESKTOP CHAT
+══════════════════════════════ */
+(function() {
+  var cState = { step: 'greeting', locked: false };
+  var msgs   = document.getElementById('claude-messages');
+  var inp    = document.getElementById('claude-input');
+  var btn    = document.getElementById('claude-send');
+  var footer = document.getElementById('claude-footer');
+
+  if (!msgs) return;
+
+  function scrollBot() { msgs.scrollTop = msgs.scrollHeight; }
+  function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function addUser(text) {
+    var r = document.createElement('div'); r.className = 'claude-msg-user';
+    r.innerHTML = '<div class="claude-bubble-user">' + esc(text) + '</div>';
+    msgs.appendChild(r); scrollBot();
+  }
+
+  function addBot(html, delay) {
+    return new Promise(function(res) {
+      // typing indicator
+      var t = document.createElement('div'); t.className = 'claude-msg-bot';
+      t.innerHTML = '<div class="claude-avatar-light" style="background:#d4a96a;">✦</div>'
+        + '<div class="claude-bubble-bot-light" style="padding-top:4px;"><div style="display:flex;gap:4px;align-items:center;">'
+        + '<span style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;animation:cdot-bounce 1.2s infinite;"></span>'
+        + '<span style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;animation:cdot-bounce 1.2s infinite 0.2s;"></span>'
+        + '<span style="width:6px;height:6px;border-radius:50%;background:#ccc;display:inline-block;animation:cdot-bounce 1.2s infinite 0.4s;"></span>'
+        + '</div></div>';
+      msgs.appendChild(t); scrollBot();
+      setTimeout(function() {
+        msgs.removeChild(t);
+        var r = document.createElement('div'); r.className = 'claude-msg-bot';
+        r.innerHTML = '<div class="claude-avatar-light" style="background:#d4a96a;">✦</div>'
+          + '<div class="claude-bubble-bot-light">' + html + '</div>';
+        msgs.appendChild(r); scrollBot(); res();
+      }, delay || 950);
+    });
+  }
+
+  function addIntegration(label) {
+    var d = document.createElement('div'); d.className = 'claude-msg-bot';
+    d.innerHTML = '<div class="claude-avatar-light" style="background:#d4a96a;">✦</div>'
+      + '<div class="claude-bubble-bot-light">'
+      + '<div class="claude-integration-pill"><span class="pill-icon">🔗</span><span>' + label + '</span><span class="pill-arrow">›</span></div>'
+      + '</div>';
+    msgs.appendChild(d); scrollBot();
+  }
+
+  function addChips(list) {
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:2px 0 4px 32px;';
+    list.forEach(function(lbl) {
+      var b = document.createElement('div');
+      b.style.cssText = 'border:1px solid #c97e3a;color:#c97e3a;border-radius:16px;padding:5px 12px;font-size:11px;font-weight:500;background:#fff;cursor:pointer;';
+      b.textContent = lbl;
+      b.addEventListener('click', function() { cSend(lbl); });
+      wrap.appendChild(b);
+    });
+    msgs.appendChild(wrap); scrollBot();
+    return wrap;
+  }
+
+  function setLocked(v) {
+    cState.locked = v;
+    inp.disabled = v;
+    btn.style.opacity = v ? '0.4' : '1';
+  }
+
+  function cReset() {
+    msgs.innerHTML = '';
+    cState.step = 'greeting'; cState.locked = false;
+    inp.disabled = false; btn.style.opacity = '1';
+    addBot('Hi Patrick 👋 I\'m connected to your Salesforce org via MCP. What would you like to look into today?', 600).then(function() {
+      addChips(['How is my contact center performing?', 'Who should I coach?', 'Log a call with a franchisee']);
+    });
+    if (footer) footer.textContent = 'Click a suggestion or type a question';
+  }
+
+  function cSend(override) {
+    if (cState.locked) return;
+    var text = (override !== undefined ? override : inp.value).trim();
+    if (!text) return;
+    inp.value = '';
+    // remove any chip rows
+    msgs.querySelectorAll('div[style*="flex-wrap"]').forEach(function(el) { msgs.removeChild(el); });
+    addUser(text); setLocked(true);
+
+    if (cState.step === 'greeting') {
+      cState.step = 'analysis';
+      addIntegration('Used Salesforce integration, loaded tools');
+      addBot('Got it — let me pull your last 60 days of case data.', 700).then(function() {
+        addIntegration('salesforce_query · Cases (last 60 days) → 209 records');
+        return addBot(
+          '<div class="claude-sf-card"><div class="claude-sf-card-label">Case Summary — Last 60 Days</div>'
+          + '<div class="claude-sf-row"><span>Total Cases</span><span class="claude-sf-val">209</span></div>'
+          + '<div class="claude-sf-row"><span>Open / Unresolved</span><span class="claude-sf-val warn">161</span></div>'
+          + '<div class="claude-sf-row"><span>Closed</span><span class="claude-sf-val good">38</span></div>'
+          + '<div class="claude-sf-row"><span>Escalated</span><span class="claude-sf-val bad">3</span></div></div>'
+          + 'Want me to break this down by agent?', 900);
+      }).then(function() {
+        setLocked(false);
+        addChips(['Yes, break down by agent', 'Who needs coaching most?']);
+      });
+    } else if (cState.step === 'analysis') {
+      cState.step = 'coaching';
+      addIntegration('salesforce_query · Agent performance cross-reference');
+      addBot(
+        '<div class="claude-sf-card"><div class="claude-sf-card-label">Agent Breakdown — Close Rate</div>'
+        + '<div class="claude-sf-row"><span>Alexis Williams</span><span class="claude-sf-val bad">0%</span></div>'
+        + '<div class="claude-sf-row"><span>Patrick Loughran</span><span class="claude-sf-val warn">15%</span></div>'
+        + '<div class="claude-sf-row"><span>Brenda Service</span><span class="claude-sf-val warn">55%</span></div>'
+        + '<div class="claude-sf-row"><span>Linda Service</span><span class="claude-sf-val good">80%</span></div>'
+        + '<div class="claude-sf-row"><span>Jay Service</span><span class="claude-sf-val warn">67%</span></div></div>'
+        + '<strong>Top coaching priority: Alexis Williams</strong> — 0 closed of 32 total. Likely not recognizing when to escalate. I\'d recommend a structured call review session.', 1100
+      ).then(function() {
+        setLocked(false);
+        addChips(['Log a coaching call with a franchisee', 'What else should I focus on?']);
+      });
+    } else if (cState.step === 'coaching') {
+      cState.step = 'log';
+      addBot('Sure — who did you call and what was discussed?', 700).then(function() {
+        setLocked(false);
+        addChips(['Call with John Bailey re: Property Improvement Plan']);
+      });
+    } else if (cState.step === 'log') {
+      cState.step = 'confirm';
+      addIntegration('salesforce_get_contact · "John Bailey" → Contact ID found');
+      addIntegration('salesforce_get_user · "Patrick Loughran" → User ID found');
+      addBot(
+        'Found both records. Here\'s what I\'ll log:<br/><br/>'
+        + '<strong>Who:</strong> Patrick Loughran called John Bailey<br/>'
+        + '<strong>Subject:</strong> Call with John Bailey — Property Improvement Plan<br/>'
+        + '<strong>Description:</strong> Discussed property improvement plan; follow-up needed<br/>'
+        + '<strong>Type:</strong> Call<br/><br/>'
+        + 'Shall I create this activity log in Salesforce?', 1000
+      ).then(function() {
+        setLocked(false);
+        addChips(['Yes, create it', 'Start over']);
+      });
+    } else if (cState.step === 'confirm') {
+      if (text.toLowerCase().includes('yes') || text.toLowerCase().includes('create')) {
+        addIntegration('salesforce_create_activity · ActivityType=Call → Created ✓');
+        addBot('Done ✓ Activity log created in Salesforce. John Bailey\'s record now shows the call with your notes. Anything else?', 800).then(function() {
+          cState.step = 'done'; setLocked(false);
+          addChips(['Start over']);
+        });
+      } else {
+        cReset();
+      }
+    } else {
+      cReset();
+    }
+  }
+
+  btn.addEventListener('click', function() { cSend(); });
+  inp.addEventListener('keydown', function(e) { if (e.key === 'Enter') cSend(); });
+  cReset();
 })();
 
 /* ══════════════════════════════
