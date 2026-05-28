@@ -890,6 +890,8 @@ body {
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--dark-border);
+  display: flex;
+  flex-direction: column;
 }
 .obj-card-q {
   background: var(--dark-surf2);
@@ -898,6 +900,7 @@ body {
   display: flex;
   gap: 8px;
   align-items: flex-start;
+  flex-shrink: 0;
 }
 .obj-card-tag {
   font-size: 8px;
@@ -919,6 +922,7 @@ body {
 .obj-card-a {
   background: var(--dark-surf);
   padding: 9px 12px;
+  flex: 1;
 }
 .obj-card-a-tag {
   font-size: 8px;
@@ -1488,7 +1492,7 @@ body {
         </div>
         <div class="obj-card-a">
           <div class="obj-card-a-tag">Response</div>
-          <div class="obj-card-a-text"><strong>MuleSoft enforces identity-based access natively.</strong> Every tool call is governed — the agent only sees what the authenticated user is entitled to. Same security model as any API.</div>
+          <div class="obj-card-a-text"><strong>Salesforce Named Principal + OAuth resolves this at the identity layer.</strong> Every MCP tool call inherits the authenticated user's entitlements — the agent can only see what that user is allowed to see. MuleSoft enforces it at the gateway. No custom auth logic, no workarounds. Same security model as any governed API. MuleSoft can also extend this to external MCP Servers — one identity fabric across your entire tool ecosystem.</div>
         </div>
       </div>
 
@@ -1510,7 +1514,7 @@ body {
         </div>
         <div class="obj-card-a">
           <div class="obj-card-a-tag">Response</div>
-          <div class="obj-card-a-text"><strong>MuleSoft is the consumption gateway</strong> — rate limits, quotas, and telemetry per team or use case. Visibility before it hits your bill, not after.</div>
+          <div class="obj-card-a-text"><strong>MuleSoft Omni Gateway + Policies pull this entire picture together.</strong> Rate limits, quotas, and SLA policies are applied at the MCP bridge layer — before any tool call hits a backend system. Every agent invocation is telemetered per team, per use case, per model. Visibility before it hits your bill, not after. This isn't theoretical — the MCP bridge is the enforcement point, and Policies are the dial you turn.</div>
         </div>
       </div>
 
