@@ -954,6 +954,7 @@ body {
   .title-main { font-size: 36px; }
 }
 </style>
+<script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
 </head>
 <body>
 
@@ -1007,33 +1008,56 @@ body {
      SLIDE 1 — TITLE
 ══════════════════════════════════════════ -->
 <section class="slide slide-title" id="s1">
-  <div class="slide-inner">
-    <div class="speed-recap-pill">
-      <span class="pill-icon">⚡</span> 5-Minute Speed Recap
-    </div>
-    <div class="title-eyebrow">Salesforce Innovation Center (SIC) · Bryant Park, NYC · May 21, 2026</div>
-    <h1 class="title-headline">
-      Wyndham MCP Demo<br/>
-      <span>Recap &amp; Learnings</span>
-    </h1>
-    <p class="title-sub">
-      A summary of what we built with MCP + Agentforce, the customer conversations
-      it sparked, and how we answered the toughest questions from the CIO and CMO.
-    </p>
-    <div class="title-meta">
-      <div class="title-tag">
-        <div class="dot"></div>
-        Live Demo Delivered
+  <div class="slide-inner" style="justify-content:center;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;width:100%;">
+
+      <!-- Left: headline & meta -->
+      <div>
+        <div class="speed-recap-pill" style="margin-bottom:14px;">
+          <span class="pill-icon">⚡</span> 5-Minute Speed Recap
+        </div>
+        <div class="title-eyebrow">Salesforce Innovation Center (SIC) · Bryant Park, NYC · May 21, 2026</div>
+        <h1 class="title-headline">
+          Wyndham MCP Demo<br/>
+          <span>Recap &amp; Learnings</span>
+        </h1>
+        <p class="title-sub">
+          A summary of what we built with MCP + Agentforce, the customer conversations
+          it sparked, and how we answered the toughest questions from the CIO and CMO.
+        </p>
+        <div class="title-meta">
+          <div class="title-tag">
+            <div class="dot"></div>
+            Live Demo Delivered
+          </div>
+          <div class="title-tag">Agentforce + Vertex AI</div>
+          <div class="title-tag">MuleSoft MCP Gateway</div>
+        </div>
+        <div class="title-logos">
+          <div class="logo-badge">Agentforce</div>
+          <div class="logo-badge">Google Agentspace</div>
+          <div class="logo-badge">Lightning Web Components</div>
+          <div class="logo-badge">Salesforce Data Cloud</div>
+          <div class="logo-badge">MuleSoft</div>
+        </div>
       </div>
-      <div class="title-tag">Agentforce + Vertex AI</div>
-      <div class="title-tag">MuleSoft MCP Gateway</div>
-    </div>
-    <div class="title-logos">
-      <div class="logo-badge">Agentforce</div>
-      <div class="logo-badge">Google Agentspace</div>
-      <div class="logo-badge">Lightning Web Components</div>
-      <div class="logo-badge">Salesforce Data Cloud</div>
-      <div class="logo-badge">MuleSoft</div>
+
+      <!-- Right: Vidyard video -->
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:4px;">▶ Watch the Demo</div>
+        <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+          <img
+            style="width:100%;margin:auto;display:block;"
+            class="vidyard-player-embed"
+            src="https://play.vidyard.com/jGLEQJgw71Y6h8rroboGbB.jpg"
+            data-uuid="jGLEQJgw71Y6h8rroboGbB"
+            data-v="4"
+            data-type="lightbox"
+          />
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);">Click to play · opens in lightbox</div>
+      </div>
+
     </div>
   </div>
 </section>
