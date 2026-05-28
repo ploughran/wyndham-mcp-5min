@@ -1008,44 +1008,54 @@ body {
      SLIDE 1 — TITLE
 ══════════════════════════════════════════ -->
 <section class="slide slide-title" id="s1">
-  <div class="slide-inner" style="justify-content:center;">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;width:100%;">
+  <div class="slide-inner" style="justify-content:center;padding-top:60px;padding-bottom:32px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;width:100%;">
 
       <!-- Left: headline & meta -->
-      <div>
-        <div class="speed-recap-pill" style="margin-bottom:14px;">
-          <span class="pill-icon">⚡</span> 5-Minute Speed Recap
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <!-- Pill + eyebrow on one line -->
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap;">
+          <div class="speed-recap-pill" style="margin-bottom:0;">
+            <span class="pill-icon">⚡</span> 5-Minute Speed Recap
+          </div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.45);">SIC · Bryant Park, NYC · May 21, 2026</div>
         </div>
-        <div class="title-eyebrow">Salesforce Innovation Center (SIC) · Bryant Park, NYC · May 21, 2026</div>
-        <h1 class="title-headline">
+
+        <!-- Headline — tighter size -->
+        <h1 style="font-size:clamp(28px,3.6vw,46px);font-weight:800;line-height:1.1;color:var(--white);margin:0 0 14px 0;">
           Wyndham MCP Demo<br/>
-          <span>Recap &amp; Learnings</span>
+          <span style="color:var(--gold);">Recap &amp; Learnings</span>
         </h1>
-        <p class="title-sub">
+
+        <!-- Subtitle -->
+        <p style="font-size:14px;color:rgba(255,255,255,0.6);line-height:1.6;margin:0 0 20px 0;max-width:480px;">
           A summary of what we built with MCP + Agentforce, the customer conversations
           it sparked, and how we answered the toughest questions from the CIO and CMO.
         </p>
-        <div class="title-meta">
-          <div class="title-tag">
-            <div class="dot"></div>
-            Live Demo Delivered
+
+        <!-- Tags — single row -->
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;">
+          <div class="title-tag" style="padding:5px 13px;font-size:12px;">
+            <div class="dot"></div>Live Demo Delivered
           </div>
-          <div class="title-tag">Agentforce + Vertex AI</div>
-          <div class="title-tag">MuleSoft MCP Gateway</div>
+          <div class="title-tag" style="padding:5px 13px;font-size:12px;">Agentforce + Vertex AI</div>
+          <div class="title-tag" style="padding:5px 13px;font-size:12px;">MuleSoft MCP Gateway</div>
         </div>
-        <div class="title-logos">
-          <div class="logo-badge">Agentforce</div>
-          <div class="logo-badge">Google Agentspace</div>
-          <div class="logo-badge">Lightning Web Components</div>
-          <div class="logo-badge">Salesforce Data Cloud</div>
-          <div class="logo-badge">MuleSoft</div>
+
+        <!-- Logo badges — single row -->
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:16px;border-top:1px solid rgba(255,255,255,0.1);">
+          <div class="logo-badge" style="padding:5px 11px;font-size:11px;">Agentforce</div>
+          <div class="logo-badge" style="padding:5px 11px;font-size:11px;">Google Agentspace</div>
+          <div class="logo-badge" style="padding:5px 11px;font-size:11px;">Lightning Web Components</div>
+          <div class="logo-badge" style="padding:5px 11px;font-size:11px;">Salesforce Data Cloud</div>
+          <div class="logo-badge" style="padding:5px 11px;font-size:11px;">MuleSoft</div>
         </div>
       </div>
 
       <!-- Right: Vidyard video -->
-      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;">
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:4px;">▶ Watch the Demo</div>
-        <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 8px 32px rgba(0,0,0,0.4);">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);">▶ Watch the Demo</div>
+        <div style="width:100%;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);box-shadow:0 8px 32px rgba(0,0,0,0.5);">
           <img
             style="width:100%;margin:auto;display:block;"
             class="vidyard-player-embed"
@@ -1055,7 +1065,7 @@ body {
             data-type="lightbox"
           />
         </div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.4);">Click to play · opens in lightbox</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.35);">Click to play · opens in lightbox</div>
       </div>
 
     </div>
