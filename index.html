@@ -328,6 +328,272 @@ body {
 ══════════════════════════════ */
 .slide-arch { background: var(--dark-bg); color: var(--dark-text); }
 
+/* ── Claude Desktop mock ── */
+.arch-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.arch-left { display: flex; flex-direction: column; }
+.claude-desktop {
+  background: #1c1c1e;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 480px;
+}
+.claude-titlebar {
+  background: #2c2c2e;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.claude-dots { display: flex; gap: 6px; }
+.claude-dot { width: 10px; height: 10px; border-radius: 50%; }
+.claude-dot.red    { background: #ff5f57; }
+.claude-dot.yellow { background: #febc2e; }
+.claude-dot.green  { background: #28c840; }
+.claude-titlebar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.claude-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+.claude-sidebar {
+  width: 168px;
+  background: #1c1c1e;
+  border-right: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  flex-direction: column;
+  padding: 10px 8px;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.claude-sidebar-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 7px;
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  cursor: default;
+}
+.claude-sidebar-btn.active {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.9);
+}
+.claude-sidebar-section {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.25);
+  padding: 8px 8px 3px;
+}
+.claude-sidebar-recent {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  padding: 4px 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+  border-radius: 5px;
+}
+.claude-sidebar-recent.active-item {
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.75);
+}
+.claude-chat-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.claude-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+.claude-msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.claude-bubble-user {
+  background: #3a3a3c;
+  border-radius: 16px 16px 4px 16px;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  max-width: 78%;
+  line-height: 1.45;
+}
+.claude-msg-bot { display: flex; gap: 8px; align-items: flex-start; }
+.claude-avatar {
+  width: 24px; height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #c97e3a, #a0522d);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.claude-bubble-bot {
+  background: transparent;
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  max-width: 86%;
+}
+.claude-tool-use {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(0,160,223,0.12);
+  border: 1px solid rgba(0,160,223,0.3);
+  border-radius: 6px;
+  padding: 3px 8px;
+  font-size: 10px;
+  color: var(--mule);
+  font-family: 'SF Mono', monospace;
+  margin-bottom: 6px;
+}
+.claude-tool-use .tool-check { color: #28c840; font-size: 10px; }
+.claude-sf-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin: 6px 0;
+  font-size: 11px;
+}
+.claude-sf-card-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 5px;
+}
+.claude-sf-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.7);
+}
+.claude-sf-row:last-child { border-bottom: none; }
+.claude-sf-val { font-weight: 700; color: rgba(255,255,255,0.9); }
+.claude-sf-val.warn { color: #ff9f0a; }
+.claude-sf-val.good { color: #28c840; }
+.claude-sf-val.bad  { color: #ff453a; }
+.claude-typing-indicator {
+  display: flex; gap: 8px; align-items: flex-start;
+}
+.claude-typing-dots {
+  display: flex; gap: 4px; align-items: center;
+  padding: 8px 4px;
+}
+.claude-typing-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  animation: cdot-bounce 1.2s infinite;
+}
+.claude-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.claude-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes cdot-bounce {
+  0%,80%,100% { transform: translateY(0); opacity:0.35; }
+  40% { transform: translateY(-4px); opacity:0.9; }
+}
+.claude-input-bar {
+  padding: 8px 12px 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+.claude-input-inner {
+  background: #2c2c2e;
+  border-radius: 10px;
+  padding: 7px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.claude-input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  font-family: inherit;
+  cursor: default;
+}
+.claude-input-icon { font-size: 13px; color: rgba(255,255,255,0.25); }
+.claude-model-badge {
+  font-size: 9px;
+  color: rgba(255,255,255,0.3);
+  white-space: nowrap;
+}
+/* Step nav under the mock */
+.demo-step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  padding: 0 2px;
+}
+.demo-step-dots {
+  display: flex; gap: 6px;
+}
+.demo-step-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background 0.2s, transform 0.2s;
+}
+.demo-step-dot.on { background: var(--mule); transform: scale(1.3); }
+.demo-step-btn {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 7px;
+  color: rgba(255,255,255,0.7);
+  font-size: 13px;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.demo-step-btn:hover { background: rgba(255,255,255,0.14); }
+.demo-step-btn:disabled { opacity: 0.25; cursor: default; }
+.demo-step-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+  text-align: center;
+  flex: 1;
+}
+
 .arch-mcp-hero { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
 .arch-mcp-hero img { width: 54px; height: 54px; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0,160,223,0.5)); }
 
@@ -704,82 +970,109 @@ body {
      SLIDE 2 — SALESFORCE AS MCP SERVER
 ══════════════════════════════════════════ -->
 <section class="slide slide-arch" id="s2">
-  <div class="slide-inner" >
-    <div class="arch-mcp-hero">
+  <div class="slide-inner" style="justify-content:flex-start;">
+    <div class="arch-eyebrow" style="margin-bottom:6px;">Technical Architecture · Live Demo</div>
+    <h2 class="arch-h1" style="margin-bottom:6px;">Salesforce as MCP Server</h2>
+    <p class="arch-desc" style="margin-bottom:20px;">Claude Desktop calls Salesforce tools via MCP — pulling live case data, analyzing coaching priorities, and writing activity logs back to CRM. No integration code. No API keys.</p>
+
+    <div class="arch-two-col">
+
+      <!-- LEFT: architecture diagram -->
+      <div class="arch-left">
+        <div class="arch-diagram" style="grid-template-columns: 1fr auto 1fr auto 1fr; margin-bottom:16px;">
+          <div class="arch-layer">
+            <div class="arch-layer-label">AI Client</div>
+            <div class="arch-node gold-node">
+              <div class="arch-node-name">Claude Desktop</div>
+              <div class="arch-node-sub">Sonnet 4.6</div>
+            </div>
+          </div>
+          <div class="arch-arrow">
+            <div>
+              <div style="text-align:center;font-size:20px;color:var(--mule);">⇄</div>
+              <div class="flow-label">MCP</div>
+            </div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">Salesforce MCP Server</div>
+            <div class="arch-node highlight" style="padding:14px;">
+              <div class="arch-node-name">Salesforce</div>
+              <div class="arch-node-name">MCP Server</div>
+              <div class="arch-node-sub" style="margin-top:4px;">Tool discovery &amp; execution</div>
+            </div>
+          </div>
+          <div class="arch-arrow">
+            <div>
+              <div style="text-align:center;font-size:20px;color:var(--mule);">⇄</div>
+              <div class="flow-label">Native</div>
+            </div>
+          </div>
+          <div class="arch-layer">
+            <div class="arch-layer-label">Salesforce Data</div>
+            <div class="arch-node" style="border-color:#1a6faf;">
+              <div class="arch-node-name" style="color:#4db8ff;">Service Cases</div>
+              <div class="arch-node-sub">60-day history</div>
+            </div>
+            <div class="arch-node" style="border-color:#1a6faf; margin-top:8px;">
+              <div class="arch-node-name" style="color:#4db8ff;">Activity Logs</div>
+              <div class="arch-node-sub">Write-back via MCP</div>
+            </div>
+          </div>
+        </div>
+        <div class="arch-legend" style="margin-top:0;">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--mule);"></div>MCP Protocol — bidirectional read &amp; write</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--gold);"></div>Claude generates tool calls, Salesforce executes them</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#4db8ff;"></div>All data stays in Salesforce — zero exfiltration</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Claude Desktop mock with step-through -->
       <div>
-        <div class="arch-eyebrow">Technical Architecture</div>
-        <h2 class="arch-h1">Salesforce as MCP Server</h2>
+        <div class="claude-desktop" id="claude-demo">
+          <!-- Title bar -->
+          <div class="claude-titlebar">
+            <div class="claude-dots">
+              <div class="claude-dot red"></div>
+              <div class="claude-dot yellow"></div>
+              <div class="claude-dot green"></div>
+            </div>
+            <div class="claude-titlebar-title">Improving contact center experience and employee coaching</div>
+          </div>
+          <!-- Body -->
+          <div class="claude-body">
+            <!-- Sidebar -->
+            <div class="claude-sidebar">
+              <div class="claude-sidebar-btn active">💬 Chat</div>
+              <div class="claude-sidebar-btn">📁 Projects</div>
+              <div class="claude-sidebar-btn">📎 Artifacts</div>
+              <div class="claude-sidebar-section">Recents</div>
+              <div class="claude-sidebar-recent active-item">Improving contact cent…</div>
+              <div class="claude-sidebar-recent">Wyndham hotel bookin…</div>
+              <div class="claude-sidebar-recent">Connecting to Salesfor…</div>
+              <div class="claude-sidebar-recent">Connecting to an MCP…</div>
+            </div>
+            <!-- Chat -->
+            <div class="claude-chat-area">
+              <div class="claude-messages" id="claude-msgs"></div>
+              <div class="claude-input-bar">
+                <div class="claude-input-inner">
+                  <span class="claude-input-icon">＋</span>
+                  <input class="claude-input-field" type="text" placeholder="Write a message…" disabled />
+                  <span class="claude-model-badge">Sonnet 4.6 ✦</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Step nav -->
+        <div class="demo-step-nav" id="demo-nav">
+          <button class="demo-step-btn" id="demo-prev" disabled>←</button>
+          <div class="demo-step-label" id="demo-label"></div>
+          <div class="demo-step-dots" id="demo-dots"></div>
+          <button class="demo-step-btn" id="demo-next">→</button>
+        </div>
       </div>
-    </div>
-    <p class="arch-desc">The AI layer communicates directly with Salesforce via MCP — Salesforce exposes Data Cloud and CRM as MCP tools, giving Claude and Agentforce live access to Wyndham's unified data without an intermediary gateway.</p>
 
-    <div class="arch-diagram" style="grid-template-columns: 1fr auto 1fr auto 1fr;">
-      <!-- Layer 1: AI Layer -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">AI Layer</div>
-        <div class="arch-node gold-node">
-          <div class="arch-node-name">Claude / Agentforce</div>
-          <div class="arch-node-sub">Anthropic Models</div>
-        </div>
-        <div class="arch-node" style="border-color:#58a6ff;">
-          <div class="arch-node-name" style="color:#58a6ff;">Vertex AI</div>
-          <div class="arch-node-sub">Google Cloud</div>
-        </div>
-      </div>
-
-      <!-- Arrow 1 -->
-      <div class="arch-arrow">
-        <div>
-          <div style="text-align:center; font-size:22px; color: var(--mule);">⇄</div>
-          <div class="flow-label">MCP<br/>Protocol</div>
-        </div>
-      </div>
-
-      <!-- Layer 2: Salesforce MCP Server -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">Salesforce · MCP Server</div>
-        <div class="arch-node highlight" style="padding: 16px 14px;">
-          <div class="arch-node-name">Salesforce</div>
-          <div class="arch-node-name">MCP Server</div>
-          <div class="arch-node-sub" style="margin-top:6px;">Tool discovery &amp; execution<br/>Identity-aware access control</div>
-        </div>
-      </div>
-
-      <!-- Arrow 2 -->
-      <div class="arch-arrow">
-        <div>
-          <div style="text-align:center; font-size:22px; color: var(--mule);">⇄</div>
-          <div class="flow-label">Native<br/>Access</div>
-        </div>
-      </div>
-
-      <!-- Layer 3: Data Cloud / CRM -->
-      <div class="arch-layer">
-        <div class="arch-layer-label">Salesforce Data</div>
-        <div class="arch-node" style="border-color:#1a6faf;">
-          <div class="arch-node-name" style="color:#4db8ff;">Data Cloud</div>
-          <div class="arch-node-sub">Guest 360 / Unified</div>
-        </div>
-        <div class="arch-node" style="border-color:#1a6faf;">
-          <div class="arch-node-name" style="color:#4db8ff;">CRM / Service</div>
-          <div class="arch-node-sub">Franchise Records</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="arch-legend">
-      <div class="legend-item">
-        <div class="legend-dot" style="background: var(--mule);"></div>
-        MCP Protocol (tool discovery, invocation, responses)
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: var(--gold);"></div>
-        Agentforce / Claude generating &amp; executing tool calls
-      </div>
-      <div class="legend-item">
-        <div class="legend-dot" style="background: #4db8ff;"></div>
-        Salesforce platform (CRM, Data Cloud, Service Cloud)
-      </div>
     </div>
   </div>
 </section>
@@ -1132,6 +1425,101 @@ body {
 </div><!-- #carousel -->
 
 <script>
+/* ══════════════════════════════
+   CLAUDE DESKTOP DEMO STEPS
+══════════════════════════════ */
+(function() {
+  var STEPS = [
+    {
+      label: 'Ask Claude about contact center performance',
+      messages: [
+        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' }
+      ]
+    },
+    {
+      label: 'Claude pulls live Salesforce case data via MCP',
+      messages: [
+        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
+        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
+        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Case Summary — Last 60 Days</div><div class="claude-sf-row"><span>Total Cases</span><span class="claude-sf-val">209</span></div><div class="claude-sf-row"><span>Open / Unresolved</span><span class="claude-sf-val warn">161</span></div><div class="claude-sf-row"><span>Closed Cases</span><span class="claude-sf-val good">38</span></div><div class="claude-sf-row"><span>Escalated</span><span class="claude-sf-val bad">3</span></div></div>' }
+      ]
+    },
+    {
+      label: 'Claude breaks down performance by agent',
+      messages: [
+        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
+        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
+        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Agent Case Breakdown — Last 60 Days</div><div class="claude-sf-row"><span>Alexis Williams</span><span class="claude-sf-val bad">0% close rate</span></div><div class="claude-sf-row"><span>Patrick Loughran</span><span class="claude-sf-val warn">15%</span></div><div class="claude-sf-row"><span>Brenda Service</span><span class="claude-sf-val warn">55%</span></div><div class="claude-sf-row"><span>Linda Service</span><span class="claude-sf-val good">80%</span></div><div class="claude-sf-row"><span>Jay Service</span><span class="claude-sf-val warn">67%</span></div></div>' }
+      ]
+    },
+    {
+      label: 'Claude identifies coaching priorities',
+      messages: [
+        { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
+        { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
+        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Coaching Priorities</div><div style="margin-bottom:6px;"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:2px;">↑ Alexis Williams</div><div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.4;">0 closed of 32 total — all cases sitting open. Has never escalated, possibly not recognizing when to. Highest-priority coaching.</div></div><div><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:2px;">↑ Linda Service</div><div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.4;">80% close rate but 12 open cases. Could coach on documenting resolutions faster.</div></div></div>' }
+      ]
+    },
+    {
+      label: 'Log a follow-up call to Salesforce via MCP',
+      messages: [
+        { type: 'user', text: 'Log a call with John Bailey about his property improvement plan.' },
+        { type: 'tool', name: 'salesforce_get_contact', args: 'name="John Bailey"', result: 'Contact ID found' },
+        { type: 'tool', name: 'salesforce_create_activity', args: 'type="Call", subject="Property Improvement Plan"', result: 'Activity logged ✓' },
+        { type: 'bot', html: "I found both records. Here's what I'll log:<br/><br/>• <strong>Who:</strong> Patrick Loughran called John Bailey<br/>• <strong>Subject:</strong> Call with John Bailey — Property Improvement Plan<br/>• <strong>Description:</strong> Discussed property improvement plan; follow-up needed<br/>• <strong>Type:</strong> Call<br/><br/>Activity log created in Salesforce." }
+      ]
+    }
+  ];
+
+  var current = 0;
+  var msgsEl   = document.getElementById('claude-msgs');
+  var prevBtn  = document.getElementById('demo-prev');
+  var nextBtn  = document.getElementById('demo-next');
+  var labelEl  = document.getElementById('demo-label');
+  var dotsEl   = document.getElementById('demo-dots');
+
+  if (!msgsEl) return;
+
+  // Build dots
+  STEPS.forEach(function(_, i) {
+    var d = document.createElement('div');
+    d.className = 'demo-step-dot' + (i === 0 ? ' on' : '');
+    dotsEl.appendChild(d);
+  });
+
+  function render(idx) {
+    var step = STEPS[idx];
+    msgsEl.innerHTML = '';
+    step.messages.forEach(function(m) {
+      var el = document.createElement('div');
+      if (m.type === 'user') {
+        el.className = 'claude-msg-user';
+        el.innerHTML = '<div class="claude-bubble-user">' + m.text.replace(/\n/g, '<br>') + '</div>';
+      } else if (m.type === 'tool') {
+        el.className = 'claude-msg-bot';
+        el.innerHTML = '<div class="claude-avatar">✦</div><div class="claude-bubble-bot"><div class="claude-tool-use"><span>⚙</span><span style="font-weight:700;">' + m.name + '</span><span style="color:var(--mule);margin-left:4px;font-size:9px;">(' + m.args + ')</span><span class="tool-check" style="margin-left:auto;">✓ ' + m.result + '</span></div></div>';
+      } else {
+        el.className = 'claude-msg-bot';
+        el.innerHTML = '<div class="claude-avatar">✦</div><div class="claude-bubble-bot">' + m.html + '</div>';
+      }
+      msgsEl.appendChild(el);
+    });
+    msgsEl.scrollTop = msgsEl.scrollHeight;
+    labelEl.textContent = (idx + 1) + ' / ' + STEPS.length + ' — ' + step.label;
+    dotsEl.querySelectorAll('.demo-step-dot').forEach(function(d, i) {
+      d.classList.toggle('on', i === idx);
+    });
+    prevBtn.disabled = (idx === 0);
+    nextBtn.disabled = (idx === STEPS.length - 1);
+    current = idx;
+  }
+
+  prevBtn.addEventListener('click', function() { if (current > 0) render(current - 1); });
+  nextBtn.addEventListener('click', function() { if (current < STEPS.length - 1) render(current + 1); });
+
+  render(0);
+})();
+
 /* ══════════════════════════════
    TAB SWITCH
 ══════════════════════════════ */
