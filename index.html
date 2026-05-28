@@ -29,21 +29,172 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
   background: var(--dark-bg);
   color: var(--dark-text);
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-/* ── SLIDE SHELL ── */
+/* ── CAROUSEL FRAMEWORK ── */
+#carousel {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  overflow: hidden;
+}
+
 .slide {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 64px 80px;
-  position: relative;
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  visibility: hidden;
+  pointer-events: none;
 }
-.slide-inner { max-width: 1100px; width: 100%; margin: 0 auto; }
-.slide-divider { height: 4px; background: linear-gradient(90deg, var(--mule), var(--gold)); }
 
+.slide.active {
+  transform: translateX(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.slide.prev {
+  transform: translateX(-100%);
+}
+
+.slide-inner {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 70px 48px 56px;
+}
+
+/* ── NAV BAR ── */
+.nav-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  background: rgba(12,35,64,0.97);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(201,162,39,0.3);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 50px;
+  gap: 12px;
+}
+
+.nav-brand {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--white);
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+  flex-shrink: 0;
+}
+.nav-brand span { color: var(--gold); }
+
+.nav-sep {
+  width: 1px; height: 20px;
+  background: rgba(255,255,255,0.15);
+  flex-shrink: 0;
+}
+
+/* Arrow buttons */
+.nav-arrow {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.75);
+  font-size: 16px;
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+  line-height: 1;
+  padding: 0;
+}
+.nav-arrow:hover {
+  background: rgba(255,255,255,0.16);
+  color: var(--white);
+  border-color: rgba(255,255,255,0.3);
+}
+.nav-arrow:disabled { opacity: 0.25; cursor: default; }
+
+/* Dot indicators */
+.nav-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.nav-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, width 0.2s;
+  flex-shrink: 0;
+  border: none;
+  padding: 0;
+}
+.nav-dot.active {
+  background: var(--gold);
+  transform: scale(1.3);
+  width: 18px;
+  border-radius: 4px;
+}
+.nav-dot:hover:not(.active) { background: rgba(255,255,255,0.5); }
+
+/* Slide counter */
+.nav-counter {
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Slide label */
+.nav-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+/* Keyboard hint */
+.nav-hint {
+  font-size: 10px;
+  color: rgba(255,255,255,0.25);
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.nav-hint kbd {
+  font-size: 10px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: inherit;
+}
+
+/* ══════════════════════════════
+   SHARED ELEMENTS
+══════════════════════════════ */
 .eyebrow {
   font-size: 11px;
   font-weight: 700;
@@ -66,21 +217,21 @@ body {
   line-height: 1.65;
   margin-bottom: 32px;
 }
-.slide-num {
-  position: absolute;
-  bottom: 28px;
-  right: 40px;
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--dark-muted);
-  letter-spacing: 1px;
-}
 
 /* ══════════════════════════════
    SLIDE 1 — TITLE
 ══════════════════════════════ */
 .slide-title {
   background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 55%, var(--navy) 100%);
+}
+.slide-title::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 50%, rgba(201,162,39,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 30%, rgba(0,160,223,0.09) 0%, transparent 50%);
+  pointer-events: none;
 }
 .title-badge {
   display: inline-flex;
@@ -110,11 +261,7 @@ body {
   color: var(--gold-light);
   margin-bottom: 40px;
 }
-.title-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
+.title-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .title-tag {
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.15);
@@ -142,17 +289,8 @@ body {
   padding: 24px 22px;
 }
 .what-card-icon { font-size: 28px; margin-bottom: 12px; }
-.what-card-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.what-card-body {
-  font-size: 13px;
-  color: var(--dark-muted);
-  line-height: 1.6;
-}
+.what-card-title { font-size: 14px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.what-card-body { font-size: 13px; color: var(--dark-muted); line-height: 1.6; }
 .what-card.highlight-mule { border-color: var(--mule); box-shadow: 0 0 20px rgba(0,160,223,0.12); }
 .what-card.highlight-gold { border-color: var(--gold); box-shadow: 0 0 20px rgba(201,162,39,0.12); }
 .what-card.highlight-green { border-color: var(--green); box-shadow: 0 0 20px rgba(46,204,113,0.1); }
@@ -410,10 +548,7 @@ body {
   border-radius: 14px;
   padding: 26px 22px;
 }
-.cap-num {
-  font-size: 11px; font-weight: 800; color: var(--gold);
-  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px;
-}
+.cap-num { font-size: 11px; font-weight: 800; color: var(--gold); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
 .cap-title { font-size: 16px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
 .cap-body { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 14px; }
 .cap-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
@@ -437,44 +572,62 @@ body {
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 14px; padding: 24px 20px;
 }
-.next-horizon {
-  font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 1.2px; color: var(--mule); margin-bottom: 6px;
-}
+.next-horizon { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; color: var(--mule); margin-bottom: 6px; }
 .next-title { font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
 .next-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
 .next-items li {
   display: flex; align-items: flex-start; gap: 8px;
   font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.5;
 }
-.next-items li::before {
-  content: '→'; color: var(--mule);
-  font-weight: 700; flex-shrink: 0; margin-top: 1px;
-}
+.next-items li::before { content: '→'; color: var(--mule); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.next-items li:last-child { border-bottom: none; }
 .closing-bar {
   margin-top: 36px;
   border-top: 1px solid rgba(255,255,255,0.1);
   padding-top: 24px;
   text-align: center;
 }
-.closing-quote {
-  font-size: 17px; font-style: italic;
-  color: var(--gold-light); line-height: 1.55; margin-bottom: 6px;
-}
+.closing-quote { font-size: 17px; font-style: italic; color: var(--gold-light); line-height: 1.55; margin-bottom: 6px; }
 .closing-attr { font-size: 12px; color: rgba(255,255,255,0.4); }
 
 /* ── scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 800px) {
+  .slide-inner { padding: 60px 24px 40px; }
+  .what-grid, .caps-grid, .next-grid { grid-template-columns: 1fr; }
+  .chat-layout { grid-template-columns: 1fr; }
+  .arch-row { grid-template-columns: 1fr; }
+  .arch-arrow { transform: rotate(90deg); }
+  .title-main { font-size: 36px; }
+}
 </style>
 </head>
 <body>
 
+<!-- ══════ NAV BAR ══════ -->
+<nav class="nav-bar" id="nav-bar">
+  <div class="nav-brand">Wyndham <span>× Salesforce</span></div>
+  <div class="nav-sep"></div>
+  <button class="nav-arrow" id="btn-prev" title="Previous (← Arrow)">&#8592;</button>
+  <div class="nav-dots" id="nav-dots"></div>
+  <button class="nav-arrow" id="btn-next" title="Next (→ Arrow)">&#8594;</button>
+  <div class="nav-sep"></div>
+  <div class="nav-label" id="nav-label"></div>
+  <div class="nav-counter" id="nav-counter"></div>
+  <div class="nav-sep"></div>
+  <div class="nav-hint"><kbd>←</kbd><kbd>→</kbd> to navigate</div>
+</nav>
+
+<div id="carousel">
+
 <!-- ══════════════════════════════════════════
      SLIDE 1 — TITLE
 ══════════════════════════════════════════ -->
-<section class="slide slide-title">
+<section class="slide slide-title" id="s1">
   <div class="slide-inner">
     <div class="title-badge">
       <span>5-Min Overview</span>
@@ -489,15 +642,12 @@ body {
       <span class="title-tag">Google Agentspace</span>
     </div>
   </div>
-  <div class="slide-num" style="color:rgba(255,255,255,0.3);">01 / 05</div>
 </section>
-
-<div class="slide-divider"></div>
 
 <!-- ══════════════════════════════════════════
      SLIDE 2 — WHAT IS MCP + ARCHITECTURE
 ══════════════════════════════════════════ -->
-<section class="slide slide-what">
+<section class="slide slide-what" id="s2">
   <div class="slide-inner">
     <div class="eyebrow">The Standard</div>
     <div class="slide-h1">What Is MCP?</div>
@@ -512,7 +662,7 @@ body {
       <div class="what-card highlight-gold">
         <div class="what-card-icon">⇄</div>
         <div class="what-card-title">Client + Server Roles</div>
-        <div class="what-card-body"><strong style="color:var(--white)">Salesforce as server</strong> — exposes CRM & Data Cloud as tools. <strong style="color:var(--white)">Salesforce as client</strong> — Agentforce agents call external MCP servers (MuleSoft, PMS, loyalty, etc.).</div>
+        <div class="what-card-body"><strong style="color:var(--white)">Salesforce as server</strong> — exposes CRM &amp; Data Cloud as tools. <strong style="color:var(--white)">Salesforce as client</strong> — Agentforce agents call external MCP servers (MuleSoft, PMS, loyalty, etc.).</div>
       </div>
       <div class="what-card highlight-green">
         <div class="what-card-icon">🏛️</div>
@@ -545,15 +695,12 @@ body {
       </div>
     </div>
   </div>
-  <div class="slide-num">02 / 05</div>
 </section>
-
-<div class="slide-divider"></div>
 
 <!-- ══════════════════════════════════════════
      SLIDE 3 — INTERACTIVE CHAT DEMO
 ══════════════════════════════════════════ -->
-<section class="slide slide-chat">
+<section class="slide slide-chat" id="s3">
   <div class="slide-inner">
     <div class="eyebrow" style="color:#1a73e8;">Live Capabilities</div>
     <div class="slide-h1" style="color:var(--navy); margin-bottom:8px;">Agents in Action</div>
@@ -682,15 +829,12 @@ body {
     </div>
 
   </div>
-  <div class="slide-num" style="color:#aaa;">03 / 05</div>
 </section>
-
-<div class="slide-divider"></div>
 
 <!-- ══════════════════════════════════════════
      SLIDE 4 — CAPABILITIES UNLOCKED
 ══════════════════════════════════════════ -->
-<section class="slide slide-caps">
+<section class="slide slide-caps" id="s4">
   <div class="slide-inner">
     <div class="eyebrow" style="color:var(--gold);">What This Enables</div>
     <div class="slide-h1">Three Capabilities Unlocked</div>
@@ -732,15 +876,12 @@ body {
       </div>
     </div>
   </div>
-  <div class="slide-num" style="color:rgba(255,255,255,0.3);">04 / 05</div>
 </section>
-
-<div class="slide-divider"></div>
 
 <!-- ══════════════════════════════════════════
      SLIDE 5 — PATH FORWARD
 ══════════════════════════════════════════ -->
-<section class="slide slide-next">
+<section class="slide slide-next" id="s5">
   <div class="slide-inner">
     <div class="eyebrow" style="color:var(--gold);">What Comes Next</div>
     <div class="slide-h1">Path Forward</div>
@@ -787,9 +928,9 @@ body {
       <div class="closing-attr">— Marc Benioff, CEO Salesforce</div>
     </div>
   </div>
-  <div class="slide-num" style="color:rgba(255,255,255,0.3);">05 / 05</div>
 </section>
 
+</div><!-- #carousel -->
 
 <script>
 /* ══════════════════════════════
@@ -1105,6 +1246,107 @@ function switchTab(tab) {
   btn.addEventListener('click', function(){gSend();});
   inp.addEventListener('keydown', function(e){if(e.key==='Enter')gSend();});
   gReset();
+})();
+
+/* ══════════════════════════════
+   CAROUSEL
+══════════════════════════════ */
+(function () {
+  const SLIDES = [
+    { id: 's1', label: 'Overview' },
+    { id: 's2', label: 'What Is MCP?' },
+    { id: 's3', label: 'Agents in Action' },
+    { id: 's4', label: 'Capabilities' },
+    { id: 's5', label: 'Path Forward' },
+  ];
+
+  let current = 0;
+  const total = SLIDES.length;
+
+  const els      = SLIDES.map(s => document.getElementById(s.id));
+  const dotsWrap = document.getElementById('nav-dots');
+  const counter  = document.getElementById('nav-counter');
+  const label    = document.getElementById('nav-label');
+  const btnPrev  = document.getElementById('btn-prev');
+  const btnNext  = document.getElementById('btn-next');
+
+  const dots = SLIDES.map((s, i) => {
+    const d = document.createElement('button');
+    d.className = 'nav-dot';
+    d.title = s.label;
+    d.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(d);
+    return d;
+  });
+
+  function goTo(idx, dir) {
+    if (idx < 0 || idx >= total || idx === current) return;
+
+    const forward = dir !== undefined ? dir > 0 : idx > current;
+    const prev = current;
+    current = idx;
+
+    els[current].style.transition = 'none';
+    els[current].style.transform = forward ? 'translateX(100%)' : 'translateX(-100%)';
+    els[current].classList.add('active');
+    els[current].classList.remove('prev');
+
+    els[current].getBoundingClientRect();
+
+    els[current].style.transition = '';
+    els[current].style.transform = 'translateX(0)';
+
+    els[prev].style.transition = '';
+    els[prev].style.transform = forward ? 'translateX(-100%)' : 'translateX(100%)';
+    els[prev].classList.remove('active');
+
+    els[prev].scrollTop = 0;
+
+    update();
+  }
+
+  function update() {
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    counter.textContent = `${current + 1} / ${total}`;
+    label.textContent = SLIDES[current].label;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  document.addEventListener('keydown', e => {
+    const tag = (document.activeElement || {}).tagName || '';
+    if (['INPUT','TEXTAREA','BUTTON','SELECT'].includes(tag)) return;
+    if ((document.activeElement || {}).isContentEditable) return;
+
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      goTo(current + 1, 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      goTo(current - 1, -1);
+    } else if (e.key === 'Home') {
+      goTo(0, -1);
+    } else if (e.key === 'End') {
+      goTo(total - 1, 1);
+    }
+  });
+
+  btnPrev.addEventListener('click', () => goTo(current - 1, -1));
+  btnNext.addEventListener('click', () => goTo(current + 1, 1));
+
+  let touchStartX = 0;
+  const carousel = document.getElementById('carousel');
+  carousel.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  carousel.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1, dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  els.forEach((el, i) => {
+    el.style.transform = i === 0 ? 'translateX(0)' : 'translateX(100%)';
+    if (i === 0) el.classList.add('active');
+  });
+  update();
 })();
 </script>
 </body>
