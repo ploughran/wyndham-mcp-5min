@@ -945,13 +945,110 @@ body {
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 3px; }
 
 /* ── RESPONSIVE ── */
-@media (max-width: 800px) {
-  .slide-inner { padding: 60px 24px 40px; }
-  .what-grid, .caps-grid, .next-grid { grid-template-columns: 1fr; }
-  .chat-layout { grid-template-columns: 1fr; }
+/* ── Tablet (≤900px) ─────────────────────────────── */
+@media (max-width: 900px) {
+  .slide-inner { padding: 60px 28px 32px; }
+
+  /* Nav: hide keyboard hint, shrink gaps */
+  .nav-hint { display: none; }
+  .nav-bar { gap: 8px; padding: 0 14px; }
+
+  /* Arch diagrams: stack vertically */
+  .arch-diagram { grid-template-columns: 1fr !important; gap: 10px; }
+  .arch-arrow { transform: rotate(90deg); margin: 0 auto; }
   .arch-row { grid-template-columns: 1fr; }
-  .arch-arrow { transform: rotate(90deg); }
-  .title-main { font-size: 36px; }
+
+  /* Chat slide: stack columns */
+  .chat-layout { grid-template-columns: 1fr; }
+  .claude-sidebar { display: none; }
+
+  /* Caps / what / next / obj grids: 2 cols on tablet */
+  .caps-grid { grid-template-columns: 1fr 1fr; }
+  .what-grid { grid-template-columns: 1fr 1fr; }
+  .next-grid { grid-template-columns: 1fr 1fr; }
+  .obj-grid  { grid-template-columns: 1fr; }
+}
+
+/* ── Mobile (≤600px) ─────────────────────────────── */
+@media (max-width: 600px) {
+  .slide-inner { padding: 58px 16px 24px; }
+
+  /* Nav: compact */
+  .nav-brand { font-size: 13px; }
+  .nav-dots  { gap: 5px; }
+  .nav-dot   { width: 6px; height: 6px; }
+  .nav-label { display: none; }
+  .nav-counter { font-size: 11px; }
+
+  /* Title slide: single column, video below */
+  #s1 .slide-inner > div[style*="grid"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 24px !important;
+  }
+
+  /* Headlines */
+  .title-headline { font-size: 28px !important; }
+  .arch-h1        { font-size: 22px !important; }
+  .slide-h1       { font-size: 20px !important; }
+  .slide-desc     { font-size: 13px; }
+
+  /* Speed recap pill */
+  .speed-recap-pill { font-size: 11px; padding: 5px 12px; }
+
+  /* Tag rows: wrap tightly */
+  .title-meta  { gap: 7px; }
+  .title-tag   { font-size: 11px; padding: 4px 10px; }
+  .title-logos { gap: 7px; margin-top: 16px; padding-top: 14px; }
+  .logo-badge  { font-size: 10px; padding: 4px 9px; }
+
+  /* Architecture diagrams: fully stacked */
+  .arch-diagram { grid-template-columns: 1fr !important; }
+  .arch-layer   { padding: 10px 12px; }
+  .arch-node    { padding: 8px 10px; font-size: 12px; }
+  .arch-desc    { font-size: 13px; }
+
+  /* Arch s3 nested grid */
+  #s3 .slide-inner div[style*="grid-template-columns:1fr 56px 1fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+
+  /* Chat slide tabs: scrollable row */
+  .tab-row { gap: 6px; overflow-x: auto; padding-bottom: 4px; flex-wrap: nowrap; }
+  .tab-btn { font-size: 11px; padding: 5px 10px; white-space: nowrap; flex-shrink: 0; }
+
+  /* Chat layout: single col, reduce heights */
+  .chat-layout { grid-template-columns: 1fr; gap: 12px; }
+  .gchat-window, .claude-app { min-height: 260px; }
+  .claude-sidebar { display: none; }
+
+  /* Caps / what / next: single col */
+  .caps-grid, .what-grid, .next-grid, .obj-grid { grid-template-columns: 1fr; }
+
+  /* Caps cards */
+  .cap-card { padding: 14px; }
+  .cap-icon { font-size: 22px; }
+
+  /* Next cards */
+  .next-card { padding: 14px 16px; }
+  .next-title { font-size: 14px; }
+
+  /* Objections */
+  .obj-card-q { font-size: 13px; padding: 10px 12px; }
+  .obj-card-a { font-size: 12px; }
+
+  /* Path forward closing bar */
+  .closing-bar { padding: 14px 16px; flex-direction: column; gap: 6px; text-align: center; }
+  .closing-quote { font-size: 12px; }
+
+  /* Shareable assets slide: single col */
+  #s7 .slide-inner div[style*="grid-template-columns:1fr 1fr"] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
 }
 </style>
 <script type="text/javascript" async src="https://play.vidyard.com/embed/v4.js"></script>
