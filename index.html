@@ -1229,19 +1229,19 @@ body {
 
     <!-- Tab Bar -->
     <div class="tab-bar">
-      <button class="tab-btn active" id="tab-af" onclick="switchTab('af')">
+      <button class="tab-btn active-claude" id="tab-claude" onclick="switchTab('claude')">
+        ✦ Contact Center Coach <span class="tab-badge" style="background:#c97e3a;">Claude Desktop</span>
+      </button>
+      <button class="tab-btn" id="tab-af" onclick="switchTab('af')">
         🤖 Franchise Owner Agent <span class="tab-badge" style="background:#032D60;">Agentforce</span>
       </button>
       <button class="tab-btn" id="tab-google" onclick="switchTab('google')">
         💬 Lead Qualification Agent <span class="tab-badge" style="background:#1a73e8;">Google Agentspace</span>
       </button>
-      <button class="tab-btn" id="tab-claude" onclick="switchTab('claude')">
-        ✦ Contact Center Coach <span class="tab-badge" style="background:#c97e3a;">Claude Desktop</span>
-      </button>
     </div>
 
     <!-- ── TAB: AGENTFORCE ── -->
-    <div id="panel-af" class="chat-layout">
+    <div id="panel-af" class="chat-layout" style="display:none;">
       <!-- Left: AF chat -->
       <div>
         <div style="font-size:11px;font-weight:600;color:#032D60;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Interactive Demo · Agentforce + Franchise MCP</div>
@@ -1353,7 +1353,7 @@ body {
     </div>
 
     <!-- ── TAB: CLAUDE DESKTOP ── -->
-    <div id="panel-claude" class="chat-layout" style="display:none;">
+    <div id="panel-claude" class="chat-layout">
       <!-- Left: Claude Desktop app -->
       <div>
         <div style="font-size:11px;font-weight:600;color:#c97e3a;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Interactive Demo · Claude Desktop + Salesforce MCP</div>
