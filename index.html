@@ -957,6 +957,36 @@ body {
 </head>
 <body>
 
+<!-- ── Password Gate ─────────────────────────────────────────── -->
+<div id="pw-gate" style="position:fixed;inset:0;z-index:9999;background:#0a0e1a;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;">
+  <div style="background:#111827;border:1px solid #1e2a3a;border-radius:14px;padding:40px 48px;text-align:center;max-width:360px;width:90%;">
+    <div style="font-size:22px;font-weight:800;color:#e6edf3;margin-bottom:6px;">Wyndham × MCP</div>
+    <div style="font-size:13px;color:#8b949e;margin-bottom:28px;">Enter the access password to continue</div>
+    <input id="pw-input" type="password" placeholder="Password"
+      style="width:100%;box-sizing:border-box;background:#0a0e1a;border:1px solid #1e2a3a;border-radius:8px;color:#e6edf3;font-size:14px;padding:10px 14px;outline:none;margin-bottom:12px;"
+      onkeydown="if(event.key==='Enter')checkPw()"/>
+    <button onclick="checkPw()" style="width:100%;background:#0070d2;border:none;border-radius:8px;color:#fff;font-size:14px;font-weight:700;padding:10px;cursor:pointer;">Continue →</button>
+    <div id="pw-err" style="color:#e8435a;font-size:12px;margin-top:10px;min-height:16px;"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const HASH='61c7c0702198c97bf59ce68c818d9ec9d3eccda9246948e2ef02abd7f7627c1b';
+  const KEY='deck_auth';
+  if(sessionStorage.getItem(KEY)===HASH)unlock();
+  async function checkPw(){
+    const val=document.getElementById('pw-input').value;
+    const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(val));
+    const hex=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(hex===HASH){sessionStorage.setItem(KEY,HASH);unlock();}
+    else{const e=document.getElementById('pw-err');e.textContent='Incorrect password.';document.getElementById('pw-input').value='';setTimeout(()=>e.textContent='',2500);}
+  }
+  function unlock(){const g=document.getElementById('pw-gate');if(g)g.remove();}
+  window.checkPw=checkPw;
+})();
+</script>
+<!-- ── End Password Gate ──────────────────────────────────────── -->
+
 <!-- ══════ NAV BAR ══════ -->
 <nav class="nav-bar" id="nav-bar">
   <div class="nav-brand">Wyndham <span>× Salesforce</span></div>
