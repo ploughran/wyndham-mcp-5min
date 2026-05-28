@@ -328,7 +328,7 @@ body {
 ══════════════════════════════ */
 .slide-arch { background: var(--dark-bg); color: var(--dark-text); }
 
-/* ── Claude Desktop mock (reuses gchat-window structure) ── */
+/* ── Two-column layout for arch + Claude mock ── */
 .arch-two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -337,107 +337,239 @@ body {
 }
 .arch-left { display: flex; flex-direction: column; }
 
-/* Dark theme overrides for the Claude window */
-.claude-window {
-  background: #1c1c1e !important;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08) !important;
+/* ── Claude Desktop Light Mode Mock ── */
+.claude-app {
+  background: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.28), 0 0 0 1px rgba(0,0,0,0.12);
+  display: flex;
+  flex-direction: column;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
+/* macOS titlebar */
 .claude-titlebar {
-  background: #2c2c2e;
-  padding: 10px 14px;
+  background: #f0ebe3;
+  padding: 9px 14px 9px 12px;
   display: flex;
   align-items: center;
   gap: 10px;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid #e0d8ce;
   flex-shrink: 0;
 }
-.claude-dots { display: flex; gap: 6px; }
+.claude-dots { display: flex; gap: 6px; align-items: center; }
 .claude-dot { width: 11px; height: 11px; border-radius: 50%; }
 .claude-dot.red    { background: #ff5f57; }
 .claude-dot.yellow { background: #febc2e; }
 .claude-dot.green  { background: #28c840; }
-.claude-titlebar-title {
+.claude-titlebar-center {
   flex: 1;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.claude-titlebar-title {
   font-size: 11.5px;
   font-weight: 500;
-  color: rgba(255,255,255,0.55);
+  color: #3a3a3a;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  max-width: 240px;
 }
-.claude-body-dark {
-  background: #1c1c1e !important;
-  height: 340px;
+.claude-titlebar-chevron { font-size: 10px; color: #888; }
+.claude-titlebar-share { font-size: 13px; color: #888; margin-left: 4px; }
+/* App body: sidebar + main */
+.claude-app-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
 }
-/* User bubble: dark grey pill (right-aligned, reuse gchat-user layout) */
-.claude-body-dark .gchat-bubble-user {
-  background: #3a3a3c;
-  color: rgba(255,255,255,0.9);
-  border-radius: 16px 16px 4px 16px;
+/* Sidebar */
+.claude-sidebar {
+  width: 160px;
+  background: #f5f0e8;
+  border-right: 1px solid #e8e0d4;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 6px;
+  gap: 1px;
+  flex-shrink: 0;
+  overflow: hidden;
 }
-/* Bot bubble: no background, just text + avatar */
-.claude-body-dark .gchat-bubble-bot {
-  background: transparent;
-  border: none;
-  box-shadow: none;
-  color: rgba(255,255,255,0.85);
-  border-radius: 0;
-}
-.claude-body-dark .gchat-bot-avatar {
-  background: linear-gradient(135deg, #c97e3a, #8b4513);
+.claude-sidebar-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
   border-radius: 6px;
   font-size: 11px;
-  font-weight: 800;
+  color: #444;
+  cursor: default;
 }
-/* Tool call pill */
-.claude-tool-pill {
+.claude-sidebar-nav.active { background: rgba(0,0,0,0.07); font-weight: 600; }
+.claude-sidebar-nav-icon { font-size: 12px; }
+.claude-sidebar-divider { height: 1px; background: #e0d8ce; margin: 5px 4px; }
+.claude-sidebar-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #9e9484;
+  padding: 5px 8px 2px;
+}
+.claude-sidebar-item {
+  font-size: 10.5px;
+  color: #666;
+  padding: 4px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: default;
+}
+.claude-sidebar-item.active-item {
+  background: rgba(0,0,0,0.06);
+  color: #222;
+  font-weight: 500;
+}
+/* User row at bottom of sidebar */
+.claude-sidebar-user {
+  margin-top: auto;
+  padding: 6px 8px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 10.5px;
+  color: #555;
+  border-top: 1px solid #e0d8ce;
+}
+.claude-sidebar-user-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #e8e8e8; border: 1px solid #ccc;
+  flex-shrink: 0;
+}
+/* Main chat area */
+.claude-chat-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  overflow: hidden;
+}
+/* Message list */
+.claude-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  scroll-behavior: smooth;
+  background: #fff;
+  height: 300px;
+}
+/* User message: grey pill, right-aligned */
+.claude-msg-user {
+  display: flex;
+  justify-content: flex-end;
+}
+.claude-bubble-user {
+  background: #f0ebe3;
+  border-radius: 16px 16px 4px 16px;
+  padding: 9px 14px;
+  font-size: 12px;
+  color: #1a1a1a;
+  max-width: 78%;
+  line-height: 1.45;
+}
+/* Bot message: no bubble, plain text left side */
+.claude-msg-bot {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.claude-avatar-light {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #d4a96a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.claude-bubble-bot-light {
+  font-size: 12px;
+  color: #1a1a1a;
+  line-height: 1.55;
+  max-width: 88%;
+}
+/* "Used Salesforce integration" pill */
+.claude-integration-pill {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  background: rgba(0,160,223,0.12);
-  border: 1px solid rgba(0,160,223,0.3);
-  border-radius: 6px;
-  padding: 3px 8px;
-  font-size: 10px;
-  color: var(--mule);
-  font-family: 'SF Mono', 'Courier New', monospace;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  padding: 3px 10px 3px 7px;
+  font-size: 10.5px;
+  color: #555;
   margin-bottom: 6px;
-  flex-wrap: wrap;
+  cursor: default;
 }
-.claude-tool-pill .t-ok { color: #28c840; margin-left: auto; }
-/* SF data card inside bot bubble */
+.claude-integration-pill .pill-icon { font-size: 11px; }
+.claude-integration-pill .pill-arrow { color: #aaa; font-size: 9px; margin-left: 2px; }
+/* SF data card (light mode) */
 .claude-sf-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
+  background: #fafafa;
+  border: 1px solid #e8e8e8;
   border-radius: 8px;
   padding: 8px 10px;
   margin: 4px 0;
 }
 .claude-sf-card-label {
   font-size: 9px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 0.8px; color: rgba(255,255,255,0.35); margin-bottom: 5px;
+  letter-spacing: 0.8px; color: #999; margin-bottom: 5px;
 }
 .claude-sf-row {
   display: flex; justify-content: space-between; align-items: center;
-  padding: 3px 0; border-bottom: 1px solid rgba(255,255,255,0.05);
-  font-size: 10.5px; color: rgba(255,255,255,0.65);
+  padding: 3px 0; border-bottom: 1px solid #f0f0f0;
+  font-size: 10.5px; color: #555;
 }
 .claude-sf-row:last-child { border-bottom: none; }
-.claude-sf-val { font-weight: 700; color: rgba(255,255,255,0.9); }
-.claude-sf-val.warn { color: #ff9f0a; }
-.claude-sf-val.good { color: #28c840; }
-.claude-sf-val.bad  { color: #ff453a; }
-/* Input bar dark override */
-.claude-input-dark {
-  background: #2c2c2e !important;
-  border-top: 1px solid rgba(255,255,255,0.07) !important;
+.claude-sf-val { font-weight: 700; color: #1a1a1a; }
+.claude-sf-val.warn { color: #e67700; }
+.claude-sf-val.good { color: #1e7e34; }
+.claude-sf-val.bad  { color: #c0392b; }
+/* Bottom input bar */
+.claude-input-bar {
+  padding: 8px 14px 10px;
+  border-top: 1px solid #ece7df;
+  background: #fff;
+  flex-shrink: 0;
 }
-.claude-input-field-dark {
-  background: #1c1c1e !important;
-  color: rgba(255,255,255,0.4) !important;
+.claude-input-inner {
+  background: #f5f0e8;
+  border-radius: 22px;
+  padding: 7px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #e0d8ce;
 }
-.claude-input-field-dark::placeholder { color: rgba(255,255,255,0.25) !important; }
+.claude-input-text {
+  flex: 1;
+  font-size: 11.5px;
+  color: #aaa;
+  font-family: inherit;
+}
+.claude-model-label {
+  font-size: 10px;
+  color: #aaa;
+  white-space: nowrap;
+}
 /* Step nav under the mock */
 .demo-step-nav {
   display: flex;
@@ -910,25 +1042,52 @@ body {
       <!-- RIGHT: Claude Desktop mock with step-through -->
       <div>
         <div style="font-size:11px;font-weight:600;color:var(--mule);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;">Live Demo · Claude Desktop + Salesforce MCP</div>
-        <div class="gchat-window claude-window">
-          <!-- macOS-style title bar -->
+        <div class="claude-app">
+          <!-- macOS titlebar -->
           <div class="claude-titlebar">
             <div class="claude-dots">
               <div class="claude-dot red"></div>
               <div class="claude-dot yellow"></div>
               <div class="claude-dot green"></div>
             </div>
-            <div class="claude-titlebar-title">Improving contact center experience and employee coaching ↓</div>
-            <div style="font-size:11px;color:rgba(255,255,255,0.3);">↗</div>
+            <div class="claude-titlebar-center">
+              <span class="claude-titlebar-title">Improving contact center experience and employee coaching</span>
+              <span class="claude-titlebar-chevron">⌄</span>
+            </div>
+            <span class="claude-titlebar-share">↗</span>
           </div>
-          <!-- Messages -->
-          <div class="gchat-body claude-body-dark" id="claude-msgs"></div>
-          <!-- Input bar -->
-          <div class="gchat-input claude-input-dark">
-            <input class="gchat-input-field claude-input-field-dark" type="text" placeholder="Write a message…" disabled />
-            <div style="font-size:10px;color:rgba(255,255,255,0.25);white-space:nowrap;">Sonnet 4.6 ✦</div>
+          <!-- Body -->
+          <div class="claude-app-body">
+            <!-- Sidebar -->
+            <div class="claude-sidebar">
+              <div class="claude-sidebar-nav active"><span class="claude-sidebar-nav-icon">💬</span> Chat</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📁</span> Projects</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">📎</span> Artifacts</div>
+              <div class="claude-sidebar-nav"><span class="claude-sidebar-nav-icon">✦</span> Customize</div>
+              <div class="claude-sidebar-divider"></div>
+              <div class="claude-sidebar-section-label">Recents</div>
+              <div class="claude-sidebar-item active-item">Improving contact cent…</div>
+              <div class="claude-sidebar-item">Wyndham hotel bookin…</div>
+              <div class="claude-sidebar-item">Connecting to Salesfor…</div>
+              <div class="claude-sidebar-item">Connecting to an MCP…</div>
+              <div class="claude-sidebar-user">
+                <div class="claude-sidebar-user-dot"></div>
+                Patrick Loughran
+              </div>
+            </div>
+            <!-- Chat main -->
+            <div class="claude-chat-main">
+              <div class="claude-messages" id="claude-msgs"></div>
+              <div class="claude-input-bar">
+                <div class="claude-input-inner">
+                  <span style="font-size:13px;color:#bbb;">＋</span>
+                  <span class="claude-input-text">Write a message…</span>
+                  <span class="claude-model-label">Sonnet 4.6 ✦</span>
+                </div>
+              </div>
+              <div style="text-align:center;font-size:9px;color:#bbb;padding:4px 0 6px;background:#fff;">Claude is AI and can make mistakes. Please double-check responses.</div>
+            </div>
           </div>
-          <div class="gchat-powered" style="background:#1c1c1e;color:rgba(255,255,255,0.25);border-top:1px solid rgba(255,255,255,0.06);">Claude · Connected to Salesforce MCP Server &nbsp;·&nbsp; <span style="color:#28c840;">● live</span></div>
         </div>
         <!-- Step nav -->
         <div class="demo-step-nav" id="demo-nav">
@@ -1307,7 +1466,7 @@ body {
       messages: [
         { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
         { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Case Summary — Last 60 Days</div><div class="claude-sf-row"><span>Total Cases</span><span class="claude-sf-val">209</span></div><div class="claude-sf-row"><span>Open / Unresolved</span><span class="claude-sf-val warn">161</span></div><div class="claude-sf-row"><span>Closed Cases</span><span class="claude-sf-val good">38</span></div><div class="claude-sf-row"><span>Escalated</span><span class="claude-sf-val bad">3</span></div></div>' }
+        { type: 'bot', html: 'Used Salesforce integration, loaded tools.<div class="claude-sf-card" style="margin-top:8px;"><div class="claude-sf-card-label">Case Summary — Last 60 Days</div><div class="claude-sf-row"><span>Total Cases</span><span class="claude-sf-val">209</span></div><div class="claude-sf-row"><span>Open / Unresolved</span><span class="claude-sf-val warn">161</span></div><div class="claude-sf-row"><span>Closed Cases</span><span class="claude-sf-val good">38</span></div><div class="claude-sf-row"><span>Escalated</span><span class="claude-sf-val bad">3</span></div></div>' }
       ]
     },
     {
@@ -1315,7 +1474,7 @@ body {
       messages: [
         { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
         { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Agent Case Breakdown — Last 60 Days</div><div class="claude-sf-row"><span>Alexis Williams</span><span class="claude-sf-val bad">0% close rate</span></div><div class="claude-sf-row"><span>Patrick Loughran</span><span class="claude-sf-val warn">15%</span></div><div class="claude-sf-row"><span>Brenda Service</span><span class="claude-sf-val warn">55%</span></div><div class="claude-sf-row"><span>Linda Service</span><span class="claude-sf-val good">80%</span></div><div class="claude-sf-row"><span>Jay Service</span><span class="claude-sf-val warn">67%</span></div></div>' }
+        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Agent Case Breakdown — Last 60 Days</div><div class="claude-sf-row"><span>Alexis Williams</span><span class="claude-sf-val bad">0% close rate</span></div><div class="claude-sf-row"><span>Patrick Loughran</span><span class="claude-sf-val warn">15%</span></div><div class="claude-sf-row"><span>Brenda Service</span><span class="claude-sf-val warn">55%</span></div><div class="claude-sf-row"><span>Linda Service</span><span class="claude-sf-val good">80%</span></div><div class="claude-sf-row"><span>Jay Service</span><span class="claude-sf-val warn">67%</span></div><div class="claude-sf-row"><span>Quentin Engineer</span><span class="claude-sf-val warn">47%</span></div></div>' }
       ]
     },
     {
@@ -1323,7 +1482,7 @@ body {
       messages: [
         { type: 'user', text: 'What can I do to improve our contact center experience?\nHow can I coach my employees and who?' },
         { type: 'tool', name: 'salesforce_query', args: 'object="Case", filter="Last 60 days"', result: '209 cases loaded' },
-        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Coaching Priorities</div><div style="margin-bottom:6px;"><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:2px;">↑ Alexis Williams</div><div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.4;">0 closed of 32 total — all cases sitting open. Has never escalated, possibly not recognizing when to. Highest-priority coaching.</div></div><div><div style="font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);margin-bottom:2px;">↑ Linda Service</div><div style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.4;">80% close rate but 12 open cases. Could coach on documenting resolutions faster.</div></div></div>' }
+        { type: 'bot', html: '<div class="claude-sf-card"><div class="claude-sf-card-label">Coaching Priorities</div><div style="margin-bottom:7px;"><div style="font-size:11px;font-weight:700;color:#c0392b;margin-bottom:2px;">↑ Alexis Williams</div><div style="font-size:10.5px;color:#555;line-height:1.4;">0 closed of 32 total — all cases sitting open. Highest-priority coaching candidate.</div></div><div><div style="font-size:11px;font-weight:700;color:#e67700;margin-bottom:2px;">↑ Patrick Loughran</div><div style="font-size:10.5px;color:#555;line-height:1.4;">15% close rate, 23 open cases. Consider pairing with a senior agent.</div></div></div>' }
       ]
     },
     {
@@ -1332,7 +1491,7 @@ body {
         { type: 'user', text: 'Log a call with John Bailey about his property improvement plan.' },
         { type: 'tool', name: 'salesforce_get_contact', args: 'name="John Bailey"', result: 'Contact ID found' },
         { type: 'tool', name: 'salesforce_create_activity', args: 'type="Call", subject="Property Improvement Plan"', result: 'Activity logged ✓' },
-        { type: 'bot', html: "I found both records. Here's what I'll log:<br/><br/>• <strong>Who:</strong> Patrick Loughran called John Bailey<br/>• <strong>Subject:</strong> Call with John Bailey — Property Improvement Plan<br/>• <strong>Description:</strong> Discussed property improvement plan; follow-up needed<br/>• <strong>Type:</strong> Call<br/><br/>Activity log created in Salesforce." }
+        { type: 'bot', html: "I found both records. Here's what I'll log:<br/><br/><strong>Who:</strong> Patrick Loughran called John Bailey<br/><strong>Subject:</strong> Call with John Bailey — Property Improvement Plan<br/><strong>Description:</strong> Discussed property improvement plan; follow-up needed<br/><strong>Type:</strong> Call<br/><br/>Can you confirm I should create this activity log?" }
       ]
     }
   ];
@@ -1359,20 +1518,19 @@ body {
     step.messages.forEach(function(m) {
       var el = document.createElement('div');
       if (m.type === 'user') {
-        el.className = 'gchat-user';
-        el.innerHTML = '<div class="gchat-bubble-user">' + m.text.replace(/\n/g, '<br>') + '</div>';
+        el.className = 'claude-msg-user';
+        el.innerHTML = '<div class="claude-bubble-user">' + m.text.replace(/\n/g, '<br>') + '</div>';
       } else if (m.type === 'tool') {
-        el.className = 'gchat-bot';
-        el.innerHTML = '<div class="gchat-bot-avatar" style="background:linear-gradient(135deg,#c97e3a,#8b4513);border-radius:6px;font-size:11px;font-weight:800;">✦</div>'
-          + '<div class="gchat-bubble-bot" style="background:transparent;border:none;box-shadow:none;color:rgba(255,255,255,0.85);">'
-          + '<div class="claude-tool-pill"><span>⚙</span><span style="font-weight:700;">' + m.name + '</span>'
-          + '<span style="color:rgba(255,255,255,0.35);margin:0 2px;">·</span>'
-          + '<span style="color:var(--mule);font-size:9px;">' + m.args + '</span>'
-          + '<span class="t-ok">✓ ' + m.result + '</span></div></div>';
+        el.className = 'claude-msg-bot';
+        el.innerHTML = '<div class="claude-avatar-light">✦</div>'
+          + '<div class="claude-bubble-bot-light">'
+          + '<div class="claude-integration-pill"><span class="pill-icon">🔗</span>'
+          + '<span>' + m.name + ' · ' + m.result + '</span>'
+          + '<span class="pill-arrow">›</span></div></div>';
       } else {
-        el.className = 'gchat-bot';
-        el.innerHTML = '<div class="gchat-bot-avatar" style="background:linear-gradient(135deg,#c97e3a,#8b4513);border-radius:6px;font-size:11px;font-weight:800;">✦</div>'
-          + '<div class="gchat-bubble-bot" style="background:transparent;border:none;box-shadow:none;color:rgba(255,255,255,0.85);">' + m.html + '</div>';
+        el.className = 'claude-msg-bot';
+        el.innerHTML = '<div class="claude-avatar-light">✦</div>'
+          + '<div class="claude-bubble-bot-light">' + m.html + '</div>';
       }
       msgsEl.appendChild(el);
     });
