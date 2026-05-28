@@ -910,6 +910,66 @@ body {
 .closing-quote { font-size: 17px; font-style: italic; color: var(--gold-light); line-height: 1.55; margin-bottom: 6px; }
 .closing-attr { font-size: 12px; color: rgba(255,255,255,0.4); }
 
+/* ══════════════════════════════
+   SLIDE — OBJECTIONS
+══════════════════════════════ */
+.slide-obj { background: var(--dark-bg); color: var(--dark-text); }
+
+.obj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+.obj-card {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--dark-border);
+}
+.obj-card-q {
+  background: var(--dark-surf2);
+  border-bottom: 1px solid var(--dark-border);
+  padding: 9px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.obj-card-tag {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold);
+  white-space: nowrap;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+.obj-card-q-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dark-text);
+  font-style: italic;
+  line-height: 1.4;
+}
+.obj-card-a {
+  background: var(--dark-surf);
+  padding: 9px 12px;
+}
+.obj-card-a-tag {
+  font-size: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.obj-card-a-text {
+  font-size: 11px;
+  color: var(--dark-muted);
+  line-height: 1.5;
+}
+.obj-card-a-text strong { color: var(--dark-text); }
+
 /* ── scrollbar ── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -1396,6 +1456,87 @@ body {
 </section>
 
 <!-- ══════════════════════════════════════════
+     SLIDE 5b — OBJECTIONS
+══════════════════════════════════════════ -->
+<section class="slide slide-obj" id="s5b">
+  <div class="slide-inner">
+    <div class="arch-eyebrow">Customer Conversation · SIC Demo — Bryant Park</div>
+    <h2 class="arch-h1" style="margin-bottom:6px;">The Tough Questions — and How We Answered</h2>
+    <p class="arch-desc" style="margin-bottom:0;">Real objections from the CIO and CMO, live from the room. Not hostile — the right questions from technical buyers doing their job.</p>
+
+    <div class="obj-grid">
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CIO</div>
+          <div class="obj-card-q-text">"Is this actually live? Or is this scripted?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>Yes — live, real API calls, real data.</strong> We showed MuleSoft gateway logs mid-demo with timestamps matching the agent's conversation turns.</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CIO</div>
+          <div class="obj-card-q-text">"What happens when a new model comes out? Does this all break?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>MCP is model-agnostic.</strong> Swap the model, the integrations stay. We treat model upgrades like deployments — agent test suites run before any version hits production.</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CIO</div>
+          <div class="obj-card-q-text">"Who controls what data the agent can see?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>MuleSoft enforces identity-based access natively.</strong> Every tool call is governed — the agent only sees what the authenticated user is entitled to. Same security model as any API.</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CMO / CIO</div>
+          <div class="obj-card-q-text">"No one knows what these models will cost. How do I budget for this?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>AELA converts unpredictable per-token costs</strong> into a governed per-conversation rate you can forecast. That's the CIO's best friend.</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CIO</div>
+          <div class="obj-card-q-text">"We're worried about runaway consumption. What's the cost gateway?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>MuleSoft is the consumption gateway</strong> — rate limits, quotas, and telemetry per team or use case. Visibility before it hits your bill, not after.</div>
+        </div>
+      </div>
+
+      <div class="obj-card">
+        <div class="obj-card-q">
+          <div class="obj-card-tag">CIO</div>
+          <div class="obj-card-q-text">"Are we paying Opus prices for tasks Sonnet could handle?"</div>
+        </div>
+        <div class="obj-card-a">
+          <div class="obj-card-a-tag">Response</div>
+          <div class="obj-card-a-text"><strong>Model tiering is a first-class cost strategy.</strong> Sonnet handles 80%+ of support volume. Opus earns its cost only for complex reasoning — multi-system structuring, escalations, agentic planning.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
      SLIDE 6 — PATH FORWARD
 ══════════════════════════════════════════ -->
 <section class="slide slide-next" id="s6">
@@ -1875,6 +2016,7 @@ function switchTab(tab) {
     { id: 's3', label: 'Agentforce Agents Calling…' },
     { id: 's4', label: 'Agents in Action' },
     { id: 's5', label: 'Capabilities' },
+    { id: 's5b', label: 'Objections' },
     { id: 's6', label: 'Path Forward' },
   ];
 
