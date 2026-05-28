@@ -223,6 +223,7 @@ body {
 ══════════════════════════════ */
 .slide-title {
   background: linear-gradient(135deg, var(--navy) 0%, #1a3a5c 55%, var(--navy) 100%);
+  color: var(--white);
 }
 .slide-title::before {
   content: '';
@@ -233,43 +234,84 @@ body {
     radial-gradient(ellipse at 85% 30%, rgba(0,160,223,0.09) 0%, transparent 50%);
   pointer-events: none;
 }
-.title-badge {
+.title-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.title-headline {
+  font-size: clamp(36px, 5vw, 58px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 16px;
+}
+.title-headline span { color: var(--gold); }
+.title-sub {
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  max-width: 640px;
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+.title-meta { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.title-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-radius: 24px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+}
+.title-tag .dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: blink 1.4s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.title-logos {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 32px;
+  padding-top: 26px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  flex-wrap: wrap;
+}
+.logo-badge {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.5px;
+}
+.speed-recap-pill {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0,160,223,0.15);
-  border: 1px solid rgba(0,160,223,0.4);
+  background: rgba(201,162,39,0.18);
+  border: 1.5px solid rgba(201,162,39,0.6);
   border-radius: 24px;
-  padding: 6px 16px;
+  padding: 7px 18px;
   font-size: 12px;
-  font-weight: 700;
-  color: var(--mule);
+  font-weight: 800;
+  color: var(--gold);
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 24px;
+  letter-spacing: 1.2px;
+  margin-bottom: 28px;
 }
-.title-main {
-  font-size: 56px;
-  font-weight: 900;
-  color: var(--white);
-  line-height: 1.05;
-  margin-bottom: 12px;
-}
-.title-sub {
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--gold-light);
-  margin-bottom: 40px;
-}
-.title-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.title-tag {
-  background: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 5px 14px;
-  font-size: 12px;
-  color: rgba(255,255,255,0.7);
-}
+.speed-recap-pill .pill-icon { font-size: 14px; }
 
 /* ══════════════════════════════
    SLIDES 2 & 3 — ARCHITECTURE
@@ -618,17 +660,32 @@ body {
 ══════════════════════════════════════════ -->
 <section class="slide slide-title" id="s1">
   <div class="slide-inner">
-    <div class="title-badge">
-      <span>5-Min Overview</span>
+    <div class="speed-recap-pill">
+      <span class="pill-icon">⚡</span> 5-Minute Speed Recap
     </div>
-    <div class="title-main">MCP + Agentforce</div>
-    <div class="title-sub">Connecting AI to Everything That Matters</div>
-    <div class="title-tags">
-      <span class="title-tag">Model Context Protocol</span>
-      <span class="title-tag">Agentforce</span>
-      <span class="title-tag">MuleSoft</span>
-      <span class="title-tag">Salesforce MCP Client/Server</span>
-      <span class="title-tag">Google Agentspace</span>
+    <div class="title-eyebrow">Salesforce Innovation Center (SIC) · Bryant Park, NYC · May 21, 2026</div>
+    <h1 class="title-headline">
+      Wyndham MCP Demo<br/>
+      <span>Recap &amp; Learnings</span>
+    </h1>
+    <p class="title-sub">
+      A summary of what we built with MCP + Agentforce, the customer conversations
+      it sparked, and how we answered the toughest questions from the CIO and CMO.
+    </p>
+    <div class="title-meta">
+      <div class="title-tag">
+        <div class="dot"></div>
+        Live Demo Delivered
+      </div>
+      <div class="title-tag">Agentforce + Vertex AI</div>
+      <div class="title-tag">MuleSoft MCP Gateway</div>
+    </div>
+    <div class="title-logos">
+      <div class="logo-badge">Agentforce</div>
+      <div class="logo-badge">Google Agentspace</div>
+      <div class="logo-badge">Lightning Web Components</div>
+      <div class="logo-badge">Salesforce Data Cloud</div>
+      <div class="logo-badge">MuleSoft</div>
     </div>
   </div>
 </section>
